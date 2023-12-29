@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\chapitre;
+use App\Models\formation;
 use App\Models\session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,44 +29,25 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        dd('ok');
 
-        View::composer('client.pages.*', function ($view) {
+        View::composer('client.connecte.*', function ($view) {
             if (!Auth::guest()) {
-                $userForm = User::with('session')->where("id", Auth::user()->id)->first();
-                $panier = User::with('session')->selectRaw('session_users.etat,session_users.operateur,
-              session_users.niveau,sessions.*')
-                    ->join('session_users', 'session_users.user_id', 'users.id')
-                    ->join('sessions', 'sessions.id', 'session_users.session_id')
-                    ->where([['session_users.etat', 'En attente'], ['users.id', Auth::user()->id]])
-                    ->get();
-                $p = Auth::user()->session;
-                $pr = $p->filter(function ($value, $key) {
-                    return $value->pivot->etat == "En attente";
-                });
-                //  dd($pr);
-                $panierPaie = User::with('session')->selectRaw('session_users.etat,session_users.operateur,
-              session_users.niveau,session_users.updated_at as date,sessions.*')
-                    ->join('session_users', 'session_users.user_id', 'users.id')
-                    ->join('sessions', 'sessions.id', 'session_users.session_id')
-                    ->where([['session_users.etat', 'Payer'], ['users.id', Auth::user()->id]])
-                    ->get();
-                $livePaie = User::with('session')->selectRaw('session_users.etat,session_users.operateur,
-              session_users.niveau,session_users.updated_at as date,sessions.*')
-                    ->join('session_users', 'session_users.user_id', 'users.id')
-                    ->join('sessions', 'sessions.id', 'session_users.session_id')
-                    ->where([['sessions.live', true], ['session_users.etat', 'Payer'], ['users.id', Auth::user()->id]])
-                    ->get();
-
-                $live = session::with('formateur')->where([['live', true], ['isform', false]])->get();
-
-                $view->with('live', $live);
-                $view->with('livep', $livePaie);
+                $chapitres = chapitre::get();
+                $userForm = User::with('examens', 'formation', "favorie")->where("id", Auth::user()->id)->first();
+                $formations = formation::with('chapitre', 'user', "formateur")->where("is_active", "1")->get();
+                $formateurs = User::where('prof', "1")->get();
+                $countsByCategory = formation::selectRaw('categorie, COUNT(*) as count')->groupBy('categorie')->get();
+                $countsByAccess = formation::selectRaw('access, COUNT(*) as count')->groupBy('access')->get();
+                $last = chapitre::where("formation_id", 1)->orderBy("id",'desc')->latest()->first();
+                // dd($last);
+                // dd($userForm->formation[0]->pivot->pluck('user_id')->all());
+                // $view->with('livep', $livePaie);
+                $view->with('formations', $formations);
+                $view->with('formateurs', $formateurs);
                 $view->with('userForm', $userForm);
-                $view->with('panier', $panier);
-                $view->with('paie', $panierPaie);
-                $view->with('pr', $pr);
-                $view->with('mesformations', $userForm->session);
+                $view->with('chapitres', $chapitres);
+                $view->with('parCategorie', $countsByCategory);
+                $view->with('parAccess', $countsByAccess);
             }
         });
 

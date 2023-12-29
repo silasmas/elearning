@@ -1,7 +1,12 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
+        {{-- @if(Route::current()->getName()=="studenRegister")
+        <div>
+            <x-text-input id="nametype" class="block mt-1 w-full hidden" type="text" name="nametype"
+                :value="'student'" required />
+        </div>
+        @endif --}}
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />

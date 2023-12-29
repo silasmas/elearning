@@ -109,9 +109,11 @@
                 <!--start login registration btn-->
                 <div class="header-log-reg text-right">
                     <ul>
-                        <li><a href="{{ route('login') }}">Connexion</a></li>
-                        {{-- <li><small>|</small></li>
-                        <li><a href="#">Inscription</a></li> --}}
+                        @if (!Auth::guest())
+                        <li><a href="{{ route('dashboard') }}">Mon profil</a></li>
+                        @else
+                            <li><a href="{{ route('studenConnect') }}">Connexion</a></li>
+                        @endif
                     </ul>
                 </div>
                 <!--end login registration btn-->

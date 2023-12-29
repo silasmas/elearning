@@ -17,13 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('ponderation');
-            $table->time('temps_debut');
-            $table->time('temps_fin');
-            $table->foreignIdFor(etudiant::class);
-            $table->foreignIdFor(formation::class);
+            $table->time('timing');          
             $table->integer('resultat')->nullable();
-            $table->text('description')->nullable();
-            $table->string('conclusion')->nullable();
+            $table->text('description')->nullable();  
+            $table->foreignIdFor(formation::class)->constrained()->onUpdate('cascade')->onDelete('cascade');          
             $table->timestamps();
         });
     }

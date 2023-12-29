@@ -1,18 +1,18 @@
 <div class="col-lg-9">
-    @include('client.parties.barAllform')
+    @include('client.connecte.parties.barAllform')
     <div class="category-course-list">
         <ul>
-            @forelse (session()->has('formBy')>0?session()->get('formBy')['f']:$allforms as $f)
+            @forelse (session()->has('formBy')>0?session()->get('formBy')['f']:$formations as $f)
             <li>
                 <div class="course-box-2">
                     <div class="course-image">
                         <a href="{{ route('detailFormation', ['id' => $f->id]) }}">
-                            <img src="{{ asset('assets/images/form/' .$f->cover) }}"
+                            <img src="{{ asset('assets/images/form/' .$f->cover ) }}"
                                 alt="" class="img-fluid" />
                         </a>
                     </div>
                     <div class="course-details">
-                        <a href="{{ route('detailFormation', ['id' => $f->id]) }}" class="course-title">{{$f->titre}}</a>
+                        <a href="{{ route('detailFormation', ['id' => $f->id]) }}" class="course-title">{{$f->title}}</a>
 
                         <div class="course-subtitle d-none d-md-block">
                         {{ Str::limit($f->description) }}
@@ -21,7 +21,7 @@
                         <div class="course-meta">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <span class=""><i class="fas fa-play-circle"></i>{{ $f->live==true && $f->isform==false?"LIVE":$f->formation->count()." Chapitres(s)" }}</span>
+                                    {{-- <span class=""><i class="fas fa-play-circle"></i>{{ $f->live==true && $f->isform==false?"LIVE":$f->formation->count()." Chapitres(s)" }}</span> --}}
                                     <span class=""><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($f->date_fin)->isoFormat('LLL') }} </span>
                                     <span class=""><i class="fas fa-closed-captioning"></i>Français</span>
                                     {{-- <button class="brn-compare-sm"
@@ -30,10 +30,10 @@
                                     </button> --}}
                                     <br>
                                     <span class="badge badge-sub-warning text-11px">
-                                        {{ $f->live==true && $f->isform==false?"LIVE":"FORMATION" }}
+                                        FORMATION
                                     </span>
                                         <span class="brn-compare-sm">
-                                            {{ $f->context }}
+                                            {{ $f->categorie }}
                                         </span>
                                 </div>
                             </div>
@@ -44,16 +44,16 @@
                                         @forelse ($f->formateur as $fr)
                                         @if  ($loop->first)
                                         <img style="margin-left: 0px;" class="position-absolute"
-                                            src="{{ asset('assets/images/form/' . $fr->photo) }}"
+                                            src="{{ asset('assets/images/form/' . $fr->profil) }}"
                                             width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="{{ $fr->prenom." ".$fr->nom }}"
+                                            title="{{ $fr->prenom." ".$fr->name }}"
                                             onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
                                             
                                         @else
                                         <img style="margin-left: 17px;" class="position-absolute"
-                                        src="{{ asset('assets/images/form/' . $fr->photo) }}"
+                                        src="{{ asset('assets/images/form/' . $fr->profil) }}"
                                         width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="{{ $fr->prenom." ".$fr->nom }}"
+                                        title="{{ $fr->prenom." ".$fr->name }}"
                                         onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
                                         
                                         @endif                                            @empty

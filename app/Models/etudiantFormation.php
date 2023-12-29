@@ -14,9 +14,9 @@ class etudiantFormation extends Model
 
     protected $dates=['created_at','updated_at'];
     public function formation(){
-        return $this->belongsTo(formation::class);
+        return $this->belongsTo(formation::class,'etudiant_formations');
     }
     public function etudiant(){
-        return $this->belongsTo(etudiant::class);
+        return $this->belongsTo(etudiant::class,'etudiant_formations');
     }
 }

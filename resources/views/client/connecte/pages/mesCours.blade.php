@@ -1,11 +1,12 @@
-@extends('client.templates.main_template', ['titre' => 'Mes formation'])
+@extends('client.connecte.templates.main_template', ['titre' => 'Mes formation'])
 
 
 @section('content')
-    @include('client.pages.sousMenu')
+    @include('client.connecte.pages.sousMenu')
 
     <section class="my-courses-area">
         <div class="container">
+            @include('client.connecte.parties.error')
             <div class="row align-items-baseline">
                 <div class="col-lg-6 ">
                     <div class="my-course-filter-bar filter-box ">
@@ -45,13 +46,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row no-gutters" id="my_courses_area">*
-                @if (is_array($paie) || is_object($paie))
-                    @forelse ($paie as $fr)
+            <div class="row no-gutters" id="my_courses_area">
+                    @forelse ($userForm->formation as $fr)
+
                         <div class="col-lg-3">
                             <div class="course-box-wrap">
                                 <div class="course-box">
-                                    <a href="{{ route('formationBy', ['id' => $fr->id]) }}">
+                                    <a href="">
                                         <div class="course-image">
                                             <img src="{{ asset('assets/images/form/' . $fr->cover) }}" alt=""
                                                 class="img-fluid" />
@@ -63,20 +64,17 @@
                                         <div class="course-details">
                                             <a href="{{ route('detailFormation', ['id' => $fr->id]) }}">
                                                 <h5 class="title">
-                                                    {{ $fr->titre }}
+                                                    {{ $fr->title }}
                                                 </h5>
                                             </a>
-                                            @if ($fr->niveau == 'commencer')
-                                                <small class="btn btn-plus">Pas encore commencer</small><br>
-                                            @else
                                                 <div class="progress" style="height: 5px;">
-                                                    <div class="progress-bar progress-bar-striped bg-danger"
-                                                        role="progressbar" style="width: 50%;" aria-valuenow="10"
-                                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar progress-bar-striped {{ $fr->pivot->evolution=="en cours"?"bg-danger":"bg-success" }}"
+                                                        role="progressbar" style="width: {{ $fr->pivot->evolution=="en cours"?"50%":"100%"}};" aria-valuenow="100"
+                                                        aria-valuemin="100" aria-valuemax="100"></div>
                                                 </div>
-                                                <small>50% Terminée</small>
-                                                <span class="btn btn-plus">{{ $fr->niveau }}</span>
-                                            @endif
+                                                <small>{{ $fr->pivot->evolution=="en cours"?"Formation en cours":"Formation terminée" }}</small>
+                                                <span class="btn btn-plus">{{ $fr->pivot->evolution}}</span>
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 px-4 py-2">
@@ -84,15 +82,17 @@
                                                     class="btn red radius-10 w-100">Voir en detail</a>
                                             </div>
                                             <div class="col-md-12 px-4 py-2">
-                                                <a href="{{ route('formationBy', ['id' => $fr->id]) }}"
-                                                    class="btn red radius-10 w-100">
-                                                    @if ($fr->niveau == 'commencer')
-                                                        @lang('general.autre.free')
+                                                @if ($fr->pivot->evolution == 'fini')
+                                                <a href="{{ route('beginForm',['id'=> $fr->id]) }}"
+                                                    class="btn green radius-10 w-100">
+                                                        @lang('general.autre.btnfini')
+                                                    </a>
                                                     @else
+                                                    <a href="{{ route('cours',['id'=> $fr->id]) }}"
+                                                        class="btn red radius-10 w-100">
                                                         @lang('general.autre.suite')
+                                                        </a>
                                                     @endif
-
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +131,6 @@
 
                     @empty
                     @endforelse
-                @else
-                    <h3>Erreur des données</h3>
-                @endif
 
 
 

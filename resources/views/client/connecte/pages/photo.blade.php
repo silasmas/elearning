@@ -1,7 +1,7 @@
 <div class="content-title-box">
     <div class="title">Photo</div>
     <div class="subtitle">Modifiez votre photo.</div>
-    @include("client.parties.error")
+    @include("client.connecte.parties.error")
 </div>
 <form enctype="multipart/form-data" action="{{ url('photo') }}" method="post" class='form-group' data-parsley-validate>
     @csrf

@@ -5,8 +5,8 @@
             <!--start heading-->
             <div class="col-lg-10 offset-lg-1">
                 <div class="banner-content text-center">
-                    <h1>Courses</h1>
-                    <p><a href="#">Accueil</a> <span> > </span>Courses</p>
+                    <h1>{{ $titre }}</h1>
+                    <p><a href="{{ route('home') }}">Accueil</a> <span> > </span>{{ $titre }}</p>
                 </div>
             </div>
             <!--end heading-->

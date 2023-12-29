@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titre')->nullable();
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
+            $table->time('nbrHeure')->nullable();
             $table->string('video')->nullable();
             $table->date('datePublication')->nullable();
             $table->foreignId('formation_id')->constrained('formations');

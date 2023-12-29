@@ -12,6 +12,14 @@ class EtudiantController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function connexon(): View
+    {
+        return  view('auth.login');
+    }
+    public function register(): View
+    {
+        return  view('auth.register');
+    }
     public function index(): View
     {
         return view("client.pages.index");
@@ -20,7 +28,7 @@ class EtudiantController extends Controller
     {
         return view("client.pages.about");
     }
-    
+
     public function contact(): View
     {
         return view("client.pages.contact");

@@ -1,8 +1,8 @@
 <div class="user-dashboard-content">
     <div class="content-title-box">
-        <div class="title">{{ $titre }}</div>
+        <div class="title">{{ session()->get('titlem')}}</div>
         <div class="subtitle">Modifiez les paramètres de votre compte.</div>
-        @include("client.parties.error")
+        @include("client.connecte.parties.error")
     </div>
     <form action="{{ url('editCompte') }}" method="post" class='form-group' data-parsley-validate onsubmit="editCompte(this)">
         @csrf

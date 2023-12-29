@@ -1,8 +1,8 @@
 <div class="col-lg-9">
-    @include('client.parties.barAllform')
+    @include('client.connecte.parties.barAllform')
     <div class="category-course-list">
         <div class="row">
-            @forelse (session()->has("formBy")?session()->get('formBy')['f']:$allforms as $f)
+            @forelse (session()->has("formBy")?session()->get('formBy')['f']:$formations as $f)
                 <div class="col-md-6 col-xl-4">
                 <div class="course-box-wrap">
                     <a href="{{ route('detailFormation', ['id' => $f->id]) }}" class="has-popover">
@@ -12,7 +12,7 @@
                                     alt="" class="img-fluid" />
                             </div>
                             <div class="course-details">
-                                <h5 class="title">{{ $f->titre }}</h5>
+                                <h5 class="title">{{ $f->title }}</h5>
                                 <div class="rating">
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
@@ -31,19 +31,19 @@
                                     </div>
                                     <div class="ms-3">
                                         <i class="far fa-list-alt text-14px"></i>
-                                        <span class="text-muted text-12px">{{ $f->live==true && $f->isform==false?"LIVE":$f->formation->count()." Chap." }}</span>
+                                        {{-- <span class="text-muted text-12px">{{ $f->live==true && $f->isform==false?"LIVE":$f->formation->count()." Chap." }}</span> --}}
                                     </div>
                                 </div>
 
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <span class="badge badge-sub-warning text-11px">
-                                            {{ $f->live==true && $f->isform==false?"LIVE":"FORMATION" }}
+                                            FORMATION
                                         </span>
                                     </div>
                                     <div class="col-6 text-end">
                                         <span class="brn-compare-sm">
-                                            {{ $f->context }}
+                                            {{ $f->categorie }}
                                         </span>
                                     </div>
                                 </div>
@@ -55,14 +55,14 @@
                                     @forelse ($f->formateur as $fr)
                                     @if  ($loop->first)
                                     <img style="margin-left: 0px;" class="position-absolute"
-                                        src="{{ asset('assets/images/form/' . $fr->photo) }}"
+                                        src="{{ asset('assets/images/form/' . $fr->profil) }}"
                                         width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="{{ $fr->prenom." ".$fr->nom }}"
+                                        title="{{ $fr->prenom." ".$fr->name}}"
                                         onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
                                         
                                     @else
                                     <img style="margin-left: 17px;" class="position-absolute"
-                                    src="{{ asset('assets/images/form/' . $fr->photo) }}"
+                                    src="{{ asset('assets/images/form/' . $fr->profil) }}"
                                     width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="{{ $fr->prenom." ".$fr->nom }}"
                                     onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />

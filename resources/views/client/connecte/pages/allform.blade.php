@@ -1,4 +1,4 @@
-@extends('client.templates.main_template', ['titre' => 'Toutes les conférence'])
+@extends('client.connecte.templates.main_template', ['titre' => 'Toutes les conférence'])
 
 @section('content')
     <section class="category-header-area" style="background-image: url('assets/images/system/course_page_banner.png');">
@@ -26,16 +26,16 @@
                             data-parent="#accordion">
                             <div class="card-body p-0">
                                 <div class="filter_type px-4 pt-4">
-                                    <h5 class="fw-700 mb-4">Categories</h5>
+                                    <h5 class="fw-700 mb-4">Filtrer</h5>
                                     <ul>
                                         <li class="">
                                             <div class="text-15px fw-700">
                                                 <a href="">
                                                     <input type="radio" id="category_all" name="sub_category" class="categories custom-radio" value="all" 
                                                     {{ session()->has("formBy")?"":"checked" }} 
-                                                    onclick="event.preventDefault(); $(location).attr('href', 'formBy/{{$titre}}&CADO');"/>
+                                                    onclick="event.preventDefault(); $(location).attr('href', 'formBy/{{session()->get('titlem')}}&CADO');"/>
                                                     <label for="category_all">Toutes conférences</label>
-                                                    <span class="float-end">({{$allforms->count() }})</span>
+                                                    <span class="float-end">({{$formations->count() }})</span>
                                                 
                                                 </a>
                                             </div>
@@ -45,94 +45,62 @@
                                 <hr />
                                 <div class="filter_type px-4">
                                     <div class="form-group">
-                                        <h5 class="fw-700 mb-3">Contexte</h5>
+                                        <h5 class="fw-700 mb-3">Catégorie</h5>
                                         <ul>
+                                            @forelse ($parCategorie as $fr)                                                
                                             <li>                                                
                                                 <div class="">
                                                         <input type="radio" id="category-2" name="sub_category"
-                                                            class="categories custom-radio" value="CADO"
-                                                             {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="context"&&session()->get("formBy")["select"][1]=="CADO"?"checked":"" }}
-                                                            onclick="event.preventDefault(); $(location).attr('href', 'formBy/context&CADO');"/>
+                                                            class="categories custom-radio" value="CADO" data-categorie="{{$fr->categorie}}"
+                                                             {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="categorie"&&session()->get("formBy")["select"][1]=="CADO"?"checked":"" }}
+                                                            onclick="event.preventDefault();redirectionAvecVidage('formBy/categorie',this)"/>
                                                         <label for="category-2">
-                                                                CADO
+                                                            {{$fr->categorie}}
                                                             </label>
-                                                            <span class="float-end">({{ $count["CADO"] }})</span>                                                           
+                                                            <span class="float-end">({{$fr->count}})</span>                                                           
                                                         
                                                 </div>
-                                                <div class="">
-                                                        <input type="radio" id="category-3" name="sub_category"
-                                                        {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="context"&&session()->get("formBy")["select"][1]=="COUPLE"?"checked":"" }}
-                                                            class="categories custom-radio" value="COUPLE" 
-                                                            onclick="event.preventDefault(); $(location).attr('href', 'formBy/context&COUPLE');"/>
-                                                            
-                                                        <label for="category-3">COUPLE</label>
-                                                        <span class="float-end">({{ $count["COUPLE"] }})</span>
-                                                </div>
                                             </li>
+                                            @empty
+                                                
+                                            @endforelse
                                         </ul>
                                     </div>
                                 </div>
                                 <hr />
                                 <div class="filter_type px-4">
                                     <div class="form-group">
-                                        <h5 class="fw-700 mb-3">Prix</h5>
+                                        <h5 class="fw-700 mb-3">Disponibilité</h5>
                                         <ul>
+                                            @forelse ($parAccess as $ac)
+                                                
                                             <li>                                                
                                                 <div class="">
                                                         <input type="radio" id="category-4" name="sub_category"
                                                             class="categories custom-radio" value="Gratuit" 
-                                                            {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="type"&&session()->get("formBy")["select"][1]=="free"?"checked":"" }}
-                                                            onclick="event.preventDefault(); $(location).attr('href', 'formBy/type&free');"/>
-                                                        <label for="category-4">Gratuit</label>
-                                                        <span class="float-end">({{ $count3["free"] }})</span>
-                                                </div>
-                                                <div class="">
-                                                        <input type="radio" id="category-5" name="sub_category"
-                                                            class="categories custom-radio" value="paid" 
-                                                            {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="type"&&session()->get("formBy")["select"][1]=="Payant"?"checked":"" }}
-                                                            onclick="event.preventDefault(); $(location).attr('href', 'formBy/type&Payant');"/>
-                                                        <label for="category-5">Payant</label>
-                                                        <span class="float-end">({{ $count3["payant"] }})</span>
+                                                            {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="type"&&session()->get("formBy")["select"][1]==$ac->access?"checked":"" }}
+                                                            onclick="event.preventDefault(); $(location).attr('href', 'formBy/access&{{ $ac->access }}');"/>
+                                                        <label for="category-4">{{$ac->access==0?"Pas disponible":"Disponile"}}</label>
+                                                        <span class="float-end">({{$ac->count}})</span>
                                                 </div>
                                             </li>
+                                            @empty
+                                                
+                                            @endforelse
                                         </ul>
                                     </div>
-                                </div>
-                                <hr />
-                                <div class="filter_type px-4">
-                                    <h5 class="fw-700 mb-3">Type</h5>
-                                    <ul>
-                                        <li>
-                                            <div class="">
-                                                <input type="radio" id="beginner" name="sub_category" class="level custom-radio"
-                                                    value="beginner" 
-                                                    {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="live"&&session()->get("formBy")["select"][1]=="1"?"checked":"" }}
-                                                    onclick="event.preventDefault(); $(location).attr('href', 'formBy/live&1');"/>
-                                                <label for="beginner">Live</label>
-                                                <span class="float-end">({{ $count2["1"] }})</span>
-                                            </div>
-                                            <div class="">
-                                                <input type="radio" id="advanced" name="sub_category" class="level custom-radio"
-                                                    value="advanced" 
-                                                    {{ session()->has("formBy")&& session()->get("formBy")["select"][0]=="isform"&&session()->get("formBy")["select"][1]=="1"?"checked":"" }}
-                                                    onclick="event.preventDefault(); $(location).attr('href', 'formBy/isform&1');"/>
-                                                <label for="advanced">Formation</label>
-                                                <span class="float-end">({{ $for["1"] }})</span>
-                                            </div>                                            
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @switch($titre)
+                @switch(session()->get('titlem'))
                     @case('verticale')
-                        @include('client.pages.verticale')
+                        @include('client.connecte.pages.verticale')
                     @break
 
                     @case('horizontale')
-                        @include('client.pages.horizontale')
+                        @include('client.connecte.pages.horizontale')
                     @break
 
                     @default
@@ -150,5 +118,14 @@
                 $(elem).text("Show more");
             }
         }
+        function redirectionAvecVidage(route, element) {
+        // Vider le contenu de la page
+        document.body.innerHTML = '';
+// Récupérer la valeur depuis l'attribut data-categorie
+let categorie = element.getAttribute('data-categorie');
+
+        // Rediriger vers la nouvelle URL avec les paramètres
+        window.location.href = '/' + route + '&' + categorie;
+    }
     </script>
 @endsection

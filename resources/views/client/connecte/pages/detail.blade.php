@@ -5,6 +5,7 @@
 
 <section class="course-header-area">
     <div class="container">
+
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="course-header-wrap">
@@ -39,6 +40,7 @@
 </section>
 <section class="course-content-area">
     <div class="container">
+        @include('client.connecte.parties.error')
         <div class="row">
             <div class="col-lg-8 order-last order-lg-first radius-10 mt-4 bg-white p-30-40">
                 <div class="description-box view-more-parent">
@@ -122,7 +124,6 @@
                         </div>
                     </div>
                 </div>
-                @if (isset($formatted))
 
                 <div class="course-curriculum-box">
 
@@ -136,7 +137,7 @@
                                 <div class="float-end">
                                     <span class="total-lectures " style="color: #000000"> {{ $chapitres->count() }}
                                         Chapitre(s) </span>
-                                    <span class="total-time"> {{ $formatted }} </span>
+                                    <span class="total-time"> {{ formatted($chapitres)}} </span>
                                 </div>
                             </div>
 
@@ -160,7 +161,6 @@
 
                     </div>
                 </div>
-                @endif
 
 
                 <div class="about-instructor-box">
@@ -173,7 +173,11 @@
 
                         <div class="col-md-4 top-instructor-img w-sm-100">
                             <a href="#">
-                                <img src="{{ asset('assets/images/form/' . $f->profil) }}" width="100%" />
+                                @if ($f->profil)
+                                <img src="{{ asset(" assets/images/form/$f->profil") }}" width="100%" />
+                                @else
+                                <img src="{{ asset(" assets/images/form/user.png") }}" width="100%" />
+                                @endif
                             </a>
                         </div>
 
@@ -204,8 +208,6 @@
                     @endforelse
 
                 </div>
-
-
             </div>
 
             <div class="col-lg-4 order-first order-lg-last">
@@ -213,7 +215,7 @@
                     <div class="preview-video-box">
                         <a data-bs-toggle="modal" data-bs-target="#CoursePreviewModal">
                             <img src="{{ asset('assets/images/form/' . $detail->cover) }}" alt="" class="w-100" />
-                            <span class="preview-text">Pésentation de la conérence</span>
+                            {{-- <span class="preview-text">Pésentation de la conérence</span> --}}
                             <span class="play-btn"></span>
                         </a>
                     </div>
@@ -240,25 +242,48 @@
 
 
                         <div class="buy-btns">
-                            <a class="btn btn-buy-now" href="{{ route('cours',['id'=>$detail->id]) }}" id="12" >
-                                Commencer
+                            @switch(checkStepForm($detail->id))
+                                @case("en cours")
+                                <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn green radius-10"
+                                    onclick="handleEnrolledButton()">
+                                    @lang('general.autre.continuer')
+                                </a>
+                                    @break
+                                @case("fini")
+                                <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn red radius-10"
+                                    onclick="handleEnrolledButton()">
+                                    @lang('general.autre.btnfini')
+                                </a>
+                                    @break
+                                @default
+                                <a class="btn btn-buy-now" href="{{ route('beginForm',['id'=>$detail->id]) }}" id="12">
+                                    Commencer
+                                </a>
+
+                            @endswitch
+                            {{-- @if ($userForm->formation->pluck('formation_id')->contains($detail->id))
+                            <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn warning radius-10"
+                                onclick="handleEnrolledButton()">
+                                @if (checkStepForm($detail->id)->evolution==)
+                                @lang('general.autre.continuer')
+                                @else
+                                @lang('general.autre.btnfini')
+                                @endif
                             </a>
+                            @else
+
+                            @endif --}}
                         </div>
                         <div class="buy-btns">
-                            <button class="btn btn-add-wishlist" type="button" onclick="handleWishList3(this)"
+
+                            <button class="{{$userForm->favorie->pluck('formation_id')->contains($detail->id)?" btn
+                                red":"btn btn-add-wishlist" }}" type="button" onclick="handleWishList3(this)"
                                 id="{{ $detail->id }}">
-                                {{--
-                                @if ($detail->session->favorie->count() > 0)
-                                @foreach ($detail->session->favorie as $r)
-                                @if ($r->session_id == $detail->session->id) --}}
+                                @if ($userForm->favorie->pluck('formation_id')->contains($detail->id))
                                 {{ 'Déjà dans vos favories' }}
-                                {{-- @else
-                                {{ 'Ajouter dans vos favories' }}
-                                @endif
-                                @endforeach
                                 @else
                                 {{ 'Ajouter dans vos favories' }}
-                                @endif --}}
+                                @endif
                             </button>
                         </div>
 

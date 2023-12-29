@@ -1,11 +1,11 @@
-@extends('client.templates.main_template', ['titre' => 'Profil'])
+@extends('client.connecte.templates.main_template', ['titre' => 'Profil'])
 
 @section('autres_style')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/parsley/parsley.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/aos.css') }}">
 @endsection
 @section('content')
-    @include('client.pages.sousMenu')
+    @include('client.connecte.pages.sousMenu')
 
     <section class="user-dashboard-area">
         <div class="container">
@@ -17,38 +17,38 @@
                                 @if (Auth::user()->photo==null)
                                 <img src="assets/images/uploads/user_image/placeholder.png" alt="" class="img-fluid" />
                                 @else
-                                <img src="{{ asset("storage/profil/".Auth::user()->photo)}}" alt="" class="img-fluid" />
+                                <img src="{{ asset("storage/profil/".Auth::user()->profil)}}" alt="" class="img-fluid" />
                                  @endif
                                 <div class="name">{{ Auth::user()->prenom . ' ' . Auth::user()->name }}</div>
                             </div>
                             <div class="user-dashboard-menu" id="list-tab" role="tablist">
                                 <ul>
                                     <li data-filter="profil"
-                                        class="link-nav {{ $titre == 'Mon Profil' ? 'active' : '' }}">
+                                        class="link-nav {{ session()->get('titlem') == 'Mon Profil' ? 'active' : '' }}">
                                         <a href="{{ route('profil') }}">Profile</a>
                                     </li>
 
-                                    <li data-filter="compte" class="{{ $titre == 'Mon Compte' ? 'active' : '' }}">
+                                    <li data-filter="compte" class="{{ session()->get('titlem') == 'Mon Compte' ? 'active' : '' }}">
                                         <a href="{{ route('compte') }}">Mon compte</a>
                                     </li>
-                                    <li data-filter="photo" class="{{ $titre == 'Photo' ? 'active' : '' }}">
+                                    <li data-filter="photo" class="{{ session()->get('titlem') == 'Photo' ? 'active' : '' }}">
                                         <a href="{{ route('photo') }}">Photo</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="user-dashboard-content">
-                            @switch($titre)
+                            @switch(session()->get('titlem'))
                                 @case('Mon Profil')
-                                    @include('client.pages.profil')
+                                    @include('client.connecte.pages.profil')
                                 @break
 
                                 @case('Photo')
-                                    @include('client.pages.photo')
+                                    @include('client.connecte.pages.photo')
                                 @break
 
                                 @case('Mon Compte')
-                                    @include('client.pages.compte')
+                                    @include('client.connecte.pages.compte')
                                 @break
                             @endswitch
                         </div>

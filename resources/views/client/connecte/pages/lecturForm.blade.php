@@ -8,13 +8,14 @@
     <!-- Top bar -->
     <div class="row">
         <div class="col-md-12 col-lg-6 col-xl-8 course_header_col">
-            <h5><img src="{{ asset('assets/images/favicon/android-chrome-192x192.png') }}" height="25" /> {{ $detail->title }}
+            <h5><img src="{{ asset('assets/images/favicon/android-chrome-192x192.png') }}" height="25" /> {{
+                $detail->title }}
             </h5>
         </div>
         <div class="col-md-12 col-lg-6 col-xl-4 course_header_col text-right">
             <a href="javascript::" class="course_btn" onclick="toggle_lesson_view()"><i
                     class="fa fa-arrows-alt-h"></i></a>
-            <a href="#" class="course_btn"> <i class="fa fa-chevron-left"></i> Mes
+            <a href="{{ route('mesFormations') }}" class="course_btn"> <i class="fa fa-chevron-left"></i> Mes
                 formations</a>
             <a href="{{ route('detailFormation', ['id' => $detail->id]) }}" class="course_btn">Detail du
                 cours <i class="fa fa-chevron-right"></i></a>
@@ -30,8 +31,8 @@
                 <!------------- PLYR.IO ------------>
                 <link rel="stylesheet" href="{{ asset('assets/global/plyr/plyr.css') }}" />
                 <div class="plyr__video-embed" id="player">
-                    <iframe height="500" src="{{isset($chap)?$chap->video:$chapitre->video }}" allowfullscreen allowtransparency
-                        allow="autoplay"></iframe>
+                    <iframe height="500" src="{{isset($chap)?$chap->video:$chapitre->video }}" allowfullscreen
+                        allowtransparency allow="autoplay"></iframe>
                 </div>
 
                 <script src="{{ asset('assets/global/plyr/plyr.js') }}"></script>
@@ -56,6 +57,8 @@
                             </p>
                             <button type="submit" id='{{ $chapitre->id }}' onclick="finiChapitre(this)"
                                 class="btn btn-danger text-center mt-3">Terminer</button>
+                            <button type="submit" id='{{ $detail->id }}' onclick="passerExamen(this)"
+                                class="btn green text-center mt-3">Passer au examens</button>
                         </div>
                     </div>
                 </div>
@@ -104,24 +107,24 @@
                                         data-parent="#accordionExample">
                                         <div class="card-body" style="padding: 0px;">
                                             <table style="width: 100%;">
-                                                @forelse ($chapitres as $ch)
+                                                @forelse ($detail->chapitre as $ch)
                                                 <tr style="width: 100%; padding: 5px 0px; background-color: #fff;">
                                                     <td style="text-align: left; padding: 7px 10px;">
                                                         <div class="form-group">
-                                                            @if ($ch->formation_id==$chapitre->id )
+                                                            @if ($ch->id==$chap->id )
                                                             <span class="text-danger">
                                                                 <i class="far fa-check-circle"></i>
                                                             </span>
                                                             @else
-                                                            <input disabled type="checkbox"
-                                                            {{ $ch->sous_titre =='active' ? 'checked ' : '' }}onchange="" />
+                                                            <input disabled type="checkbox" {{ $ch->sous_titre
+                                                            =='active' ? 'checked ' : '' }}onchange="" />
                                                             <label for="2">
                                                             </label>
                                                             @endif
                                                         </div>
                                                         <a href="{{ route('chapitre',['id'=>$detail->id,'idc'=>$ch->id]) }}"
                                                             style="color: #444549; font-size: 14px; font-weight: 400;">
-                                                            {{ $ch->titre }}
+                                                            {{ $ch->titre}}
                                                         </a>
                                                         <div class="lesson_duration">
                                                             <i class="far fa-play-circle"></i>
@@ -194,6 +197,9 @@
         function finiChapitre(id) {
             add(id.id, "../finiChapitre");
         }
+        function passerExamen(id) {
+            examen(id.id, "../passerExamen");
+        }
 
         function add(form, url) {
             swal({
@@ -222,9 +228,39 @@
                     }
                 },
             });
-            function actualiser() {
-        location.reload();
-    }
+
+        }
+        function examen(form, url) {
+            swal({
+                title: 'Merci de patienter...',
+                icon: 'info'
+            })
+            $.ajax({
+                url: url + '/' + form,
+                method: "GET",
+                data: {
+                    idform: form
+                },
+                success: function(data) {
+                    //alert(data);
+                    if (!data.reponse) {
+                        swal({
+                            title: data.msg,
+                            icon: 'error'
+                        })
+                    } else {
+                        swal({
+                            title: data.msg,
+                            icon: 'success'
+                        })
+                        window.location= '/examens?idform='+form+'&' + categorie;
+                    }
+                },
+            });
+
+        }
+        function actualiser() {
+            location.reload();
         }
 </script>
 @endsection

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->text('description')->nullable();
+            $table->text('categorie')->nullable();
             $table->string('pdf')->nullable();
             $table->string('lieu')->nullable();
             $table->string('cover')->nullable();
