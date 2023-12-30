@@ -174,9 +174,9 @@
                         <div class="col-md-4 top-instructor-img w-sm-100">
                             <a href="#">
                                 @if ($f->profil)
-                                <img src="{{ asset(" assets/images/form/$f->profil") }}" width="100%" />
+                                <img src="{{ asset("assets/images/form/$f->profil") }}" width="100%" />
                                 @else
-                                <img src="{{ asset(" assets/images/form/user.png") }}" width="100%" />
+                                <img src="{{ asset("assets/images/form/user.png") }}" width="100%" />
                                 @endif
                             </a>
                         </div>
@@ -214,7 +214,7 @@
                 <div class="course-sidebar natural">
                     <div class="preview-video-box">
                         <a data-bs-toggle="modal" data-bs-target="#CoursePreviewModal">
-                            <img src="{{ asset('assets/images/form/' . $detail->cover) }}" alt="" class="w-100" />
+                            <img src="{{ asset('assets/images/form/'.$detail->cover) }}" alt="" class="w-100" />
                             {{-- <span class="preview-text">Pésentation de la conérence</span> --}}
                             <span class="play-btn"></span>
                         </a>
