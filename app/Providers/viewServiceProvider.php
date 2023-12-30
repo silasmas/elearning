@@ -38,8 +38,8 @@ class ViewServiceProvider extends ServiceProvider
                 $formateurs = User::where('prof', "1")->get();
                 $countsByCategory = formation::selectRaw('categorie, COUNT(*) as count')->groupBy('categorie')->get();
                 $countsByAccess = formation::selectRaw('access, COUNT(*) as count')->groupBy('access')->get();
-                $last = chapitre::where("formation_id", 1)->orderBy("id",'desc')->latest()->first();
-                // dd($last);
+                $last = chapitre::where("formation_id", 1)->orderBy("id", 'desc')->latest()->first();
+                // dd($formations);
                 // dd($userForm->formation[0]->pivot->pluck('user_id')->all());
                 // $view->with('livep', $livePaie);
                 $view->with('formations', $formations);

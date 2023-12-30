@@ -173,21 +173,16 @@
 
                                     <div class="d-block">
                                         <div class="floating-user d-inline-block">
-
                                             @forelse ($f->formateur as $fr)
                                             @if ($loop->first)
                                             <img style="margin-left: 0px; width: 30px; height: 30px;"
-                                                class="position-absolute" src="{{ asset("
-                                                assets/images/form/".$fr->profil) }}" alt="user_image"
+                                                class="position-absolute" src="{{asset("assets/images/form/".$fr->profil)}}" alt="user_image"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="{{ $fr->prenom . ' ' . $fr->name }}"
-                                            onclick="event.preventDefault(); $(location).attr('href', '{{
-                                            route('formateur', ['id' => $fr->id]) }}');"
-                                            />
+                                            title="{{ $fr->prenom . ' ' . $fr->name}}"
+                                            onclick="event.preventDefault(); $(location).attr('href','{{route('formateur', ['id' => $fr->id]) }}');"/>
                                             @else
                                             <img style="margin-left: 17px; width: 30px; height: 30px;"
-                                                class="position-absolute" src="{{ asset("
-                                                assets/images/form/".$fr->profil) }}"
+                                                class="position-absolute" src="{{ asset("assets/images/form/".$fr->profil) }}"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ $fr->prenom . ' ' . $fr->name }}"
                                             onclick="event.preventDefault(); $(location).attr('href', '{{
