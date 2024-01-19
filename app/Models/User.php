@@ -47,9 +47,9 @@ class User extends Authenticatable
     }
     public function formations()
     {
-        return $this->belongsToMany(formation::class, 'user_formaturs')->withPivot('user_id','formation_id','created_at', 'updated_at');
+        return $this->belongsToMany(formation::class, 'user_formateurs')->withPivot('user_id','formation_id','created_at', 'updated_at');
     }
-    
+
     public function favorie()
     {
         return $this->hasMany(favori::class);

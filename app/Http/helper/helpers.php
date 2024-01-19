@@ -58,6 +58,25 @@ if (!function_exists('checkStepForm')) {
         }
     }
 }
+if (!function_exists('s')) {
+    function s($nbr)
+    {
+        return $nbr > 1 ? "s" : "";
+    }
+}
+if (!function_exists('question')) {
+    function question($value, $ponderation, $name)
+    {
+        $ref = preg_replace('/\s+/', '', $name . $value);
+        return '<input type="radio" id="' . $ref . '" name="' . $name . '" class="categories custom-radio"
+                 value="' . $value . '" data-categorie="" required/>
+                <label for="' . $ref . '">
+                ' . $value . '
+                </label>
+                <span class="float-end">(' . $ponderation . ')</span><br>';
+    }
+
+}
 if (!function_exists('isFinished')) {
     function isFinished($id): array
     {
@@ -93,7 +112,7 @@ if (!function_exists('siExamen')) {
 if (!function_exists('lastChapitre')) {
     function lastChapitre($id)
     {
-        $last = chapitre::where("formation_id", 1)->orderBy("id",'desc')->latest()->first();
+        $last = chapitre::where("formation_id", 1)->orderBy("id", 'desc')->latest()->first();
         if ($last) {
             $ok = examenUser::where([["user_id", Auth::user()->id], ["examens_id", $id], ["conclusion", "ok"]])->first();
             if ($ok) {

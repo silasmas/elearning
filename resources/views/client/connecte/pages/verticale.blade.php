@@ -5,7 +5,7 @@
             @forelse (session()->has("formBy")?session()->get('formBy')['f']:$formations as $f)
                 <div class="col-md-6 col-xl-4">
                 <div class="course-box-wrap">
-                    <a href="{{ route('detailFormation', ['id' => $f->id]) }}" class="has-popover">
+                    <a href="{{ route('formationDetail', ['id' => $f->id]) }}" class="has-popover">
                         <div class="course-box">
                             <div class="course-image">
                                 <img src="{{ asset('assets/images/form/' .$f->cover) }}"
@@ -56,23 +56,23 @@
                                     @if  ($loop->first)
                                     <img style="margin-left: 0px;" class="position-absolute"
                                         src="{{ asset('assets/images/form/' . $fr->profil) }}"
-                                        width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        width="30px" height="30px" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ $fr->prenom." ".$fr->name}}"
                                         onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
-                                        
+
                                     @else
                                     <img style="margin-left: 17px;" class="position-absolute"
                                     src="{{ asset('assets/images/form/' . $fr->profil) }}"
-                                    width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    width="30px" height="30px" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="{{ $fr->prenom." ".$fr->nom }}"
                                     onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
-                                    
+
                                     @endif
                                             @empty
-                                            
+
                                             @endforelse
                                         </div>
-                                  
+
 
                                     <p class="price text-right d-inline-block float-end">
                                         @if ($f->type == 'payant')
@@ -96,9 +96,9 @@
                 </div>
             </div>
             @empty
-                
+
             @endforelse
-            
+
         </div>
     </div>
     {{-- <nav>

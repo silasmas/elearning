@@ -23,6 +23,7 @@
     </div>
 
     <div class="row" id="lesson-container">
+        @include('client.connecte.parties.error')
         <!-- Course content, video, quizes, files starts-->
         <div class="col-lg-9 order-md-1 course_col" id="video_player_area">
             <!-- <div class="" style="background-color: #333;"> -->
@@ -58,7 +59,7 @@
                             <button type="submit" id='{{ $chapitre->id }}' onclick="finiChapitre(this)"
                                 class="btn btn-danger text-center mt-3">Terminer</button>
                             <button type="submit" id='{{ $detail->id }}' onclick="passerExamen(this)"
-                                class="btn green text-center mt-3">Passer au examens</button>
+                                class="btn green text-center mt-3">Passer aux examens</button>
                         </div>
                     </div>
                 </div>
@@ -253,7 +254,9 @@
                             title: data.msg,
                             icon: 'success'
                         })
-                        window.location= '/examens?idform='+form+'&' + categorie;
+                        var urls='/examen/'+form;
+                        // var urls='/examen/?idform='+form;
+                        window.location.href=urls;
                     }
                 },
             });

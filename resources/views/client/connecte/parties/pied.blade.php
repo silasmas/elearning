@@ -13,7 +13,7 @@
     function isTouchDevice() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
- 
+
     //Event call after loading page
     document.addEventListener(
         "DOMContentLoaded",
@@ -35,6 +35,13 @@
     function handleWishList3(id) {
         event.preventDefault()
         add(id.id, 'autre', "addFavori");
+    }
+    function handleWishList4(id) {
+        event.preventDefault()
+        swal({
+            title: 'Connectez-vous afin d\'avoir la possibilité de mettre dans les favoris',
+            icon: 'info'
+        })
     }
 
     function handleWishList(id) {
@@ -152,7 +159,7 @@
 
     }
 
-   
+
     function deleteFavorie(form, url) {
         swal({
             title: "Supprimer de vos favories",
@@ -195,6 +202,11 @@
 
     }
 
+    function page(name,id) {
+        alert("ok")
+        var urls=name+'?id='+id;
+        window.location.href=urls;
+    }
     function actualiser() {
         location.reload();
     }

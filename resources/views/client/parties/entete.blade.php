@@ -11,27 +11,24 @@
    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--favicon-->
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/favicon/favicon.ico') }}">
-    <!--bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <!--owl carousel css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-    <!--magnific popup css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/magnific-popup.css') }}">
-    <!--font awesome css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
-    <!--meanmenu css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/meanmenu.css') }}">
-    <!--animate css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
-    <!--main css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-    <!--responsive css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/typography.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/default-css.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/ouvert/css/responsive.css') }}">
+    <!--color css-->
+    {{-- <link rel="stylesheet" id="triggerColor" href="{{ asset('client/assets/ouvert/css/color-0.css') }}"> --}}
+    <!-- modernizr css -->
+    <script src="{{ asset('client/assets/ouvert/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
 
 <body>
     <!--star preloader-->
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="d-table">
             <div class="d-table-cell align-middle">
                 <div class="spinner">
@@ -40,5 +37,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--end preloader-->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>

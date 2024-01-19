@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Rules\Password;
-use App\Models\User;
-use App\Models\chapitre;
-use App\Models\formation;
-use Illuminate\Http\Request;
-use App\Models\formationUser;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreformationRequest;
 use App\Http\Requests\UpdateformationRequest;
+use App\Models\chapitre;
 use App\Models\examens;
 use App\Models\examenUser;
+use App\Models\formation;
+use App\Models\formationUser;
+use App\Models\User;
 use App\Rules\PhoneNumber;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Rules\Password;
+
 class FormationController extends Controller
 {
     /**
@@ -25,9 +27,17 @@ class FormationController extends Controller
      */
     public function dashbord(): View
     {
-        $categories=formation::pluck('categorie');
-        // dd($categories[0]);
-        return view('client.connecte.pages.home',compact('categories'));
+        return view('client.connecte.pages.home');
+    }
+    public function formByCategories($id)
+    {
+        // $categories = formation::select('categorie', DB::raw('COUNT(*) as count'), DB::raw('MAX(id) as max_price'))
+        //     ->distinct()
+        //     ->groupBy('categorie')
+        //     ->get();
+        $categorie = formation::with('chapitre', 'user', "formateur")->where([["is_active", "1"],["categorie",$id],["categorie","!=","atelier"]])->get();;
+        //   dd($categorie[0]);
+        return back()->with('categorie', $categorie);
     }
     public function horizontale()
     {
@@ -42,13 +52,13 @@ class FormationController extends Controller
     }
     public function compte()
     {
-         titre("Mon Compte");
+        titre("Mon Compte");
         return view('client.connecte.pages.templateProfil');
     }
 
     public function photo()
     {
-         titre("Photo");
+        titre("Photo");
         return view('client.connecte.pages.templateProfil');
     }
     public function editCompte(Request $request)
@@ -139,35 +149,40 @@ class FormationController extends Controller
     }
     public function formBy($id)
     {
-        $tab=explode("&",$id);
+        $tab = explode("&", $id);
         // dd($tab);
-      if ($tab[0]=="horizontale"||$tab[0]=="verticale") {
-        return  back();
-      } else {
-        $form=formation::with('user',"formateur")->where($tab[0],$tab[1])->get();
-      $ta=["f"=>$form,"select"=>$tab];
-        return  back()->with('formBy', $ta);
-      }
+        if ($tab[0] == "horizontale" || $tab[0] == "verticale") {
+            return back();
+        } else {
+            $form = formation::with('user', "formateur")->where($tab[0], $tab[1])->get();
+            $ta = ["f" => $form, "select" => $tab];
+            //  dd($ta);
+            // if (!Auth::guest()) {
+            return back()->with('formBy', $ta);
+            // } else {
+            // return view("client.connecte.pages.allform")->with('formBy', $ta);
+            // }
+        }
     }
     public function all()
     {
         titre("verticale");
 
-            $form=formation::get();
-              $count=$form->countBy(function($i){
-                  return $i->categorie;
-              });
-              $count2=$form->countBy(function($i){
-                  return $i->access;
-              });
-              $count3=$form->countBy(function($i){
-                  return $i->type;
-              });
-              $for=$form->countBy(function($i){
-                  return $i->isform;
-              });
+        $form = formation::get();
+        $count = $form->countBy(function ($i) {
+            return $i->categorie;
+        });
+        $count2 = $form->countBy(function ($i) {
+            return $i->access;
+        });
+        $count3 = $form->countBy(function ($i) {
+            return $i->type;
+        });
+        $for = $form->countBy(function ($i) {
+            return $i->isform;
+        });
 
-        return view('client.connecte.pages.allform',compact('count','count2','count3','for'));
+        return view('client.connecte.pages.allform', compact('count', 'count2', 'count3', 'for'));
     }
 
     public function index(): View
@@ -218,7 +233,7 @@ class FormationController extends Controller
     }
     public function finiChapitre($id)
     {
-        $siExiste=formationUser::where([["user_id",Auth::user()->id],["formation_id",$id],["evolution","fini"]])->first();
+        $siExiste = formationUser::where([["user_id", Auth::user()->id], ["formation_id", $id], ["evolution", "fini"]])->first();
         if ($siExiste) {
             return response()->json(['reponse' => false, 'msg' => "Il se fait que vous aviez déjà passer cet examen et il ne peut être repris deux fois. Si vous ne reconnaissez pas avoir passer cette examen merci de vous rapprocher des responsable!"]);
         } else {
@@ -244,24 +259,41 @@ class FormationController extends Controller
         }
 
     }
-    public function passerExamen($id){
-        // dd($id);
-        $examen=examens::where("formation_id",$id)->first();
-        if ($examen) {
-           $debutExamen=examenUser::updateOrcreate([
-            'examens_id' => $examen->id,
-            'user_id' => Auth::user()->id,
-        ]);
-        if ($debutExamen) {
-            return response()->json(['reponse' => true, 'msg' => "Vous pouvez passer votre examen"]);
+    public function passerExamen($id)
+    {
+        $examPret = examens::where("formation_id", $id)->get();
+        if ($examPret) {
+            $examen = examens::whereNotIn('id', function ($query) {
+                $query->select('examens_id')->from('examen_users')
+                    ->where('user_id', Auth::user()->id);
+            })->inRandomOrder()->first();
+            if ($examen) {
+                $debutExamen = examenUser::updateOrcreate([
+                    'examens_id' => $examen->id,
+                    'user_id' => Auth::user()->id,
+                ]);
+                if ($debutExamen) {
+                    return response()->json(['reponse' => true, 'msg' => "Vous pouvez passer votre examen"]);
+                } else {
+                    return response()->json(['reponse' => false, 'msg' => "Erreur"]);
+                }
+            } else {
+                $pasConclu = examens::whereNotIn('id', function ($query) {
+                    $query->select('examens_id')->from('examen_users')
+                        ->where([['user_id', Auth::user()->id], ['conclusion', "!=", "null"]]);
+                })->inRandomOrder()->first();
+                if ($pasConclu) {
+                    return response()->json(['reponse' => true, 'msg' => "Vous votre examen n'a pas des note, vous pouvez reprendre"]);
+                } else {
+                    return response()->json(['reponse' => false, 'msg' => "Vous aviez déjà passer cet examen, vous ne pourrez pas le reprendre"]);
+
+                }
+
+            }
+
         } else {
-            return response()->json(['reponse' => false, 'msg' => "Erreur"]);
-        }
-    } else {
             return response()->json(['reponse' => false, 'msg' => "L'examen pour cette formation n'est pas encore programmé, merci de contacter la coordination!!"]);
-
         }
-
     }
     public function beginForm($id)
     {
@@ -287,10 +319,10 @@ class FormationController extends Controller
     }
     public function detailformation($id)
     {
-        $detail = formation::with('chapitre', 'user')->where('id', $id)->first();
+        $detail = formation::with('chapitre', 'user', 'formateur')->where('id', $id)->first();
         $formateur = User::where('prof', "1")->get();
         $chapitres = chapitre::where('formation_id', $id)->get();
-        // dd($userForm->formation);
+        // dd($detail);
 
         return view('client.connecte.pages.detail', compact('detail', 'chapitres', 'formateur'));
 
@@ -307,7 +339,17 @@ class FormationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(formation $formation)
+    public function show($id)
+    {
+        $detail = formation::with('chapitre', 'user')->where('id', $id)->first();
+        $formateur = User::where('prof', "1")->get();
+        $chapitres = chapitre::where('formation_id', $id)->get();
+        // dd($userForm->formation);
+
+        return view('client.connecte.pages.detail', compact('detail', 'chapitres', 'formateur'));
+        // return view("client.pages.detailform");
+    }
+    public function formateur(formation $formation)
     {
         return view("client.pages.detailform");
     }

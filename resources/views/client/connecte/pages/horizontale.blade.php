@@ -6,13 +6,13 @@
             <li>
                 <div class="course-box-2">
                     <div class="course-image">
-                        <a href="{{ route('detailFormation', ['id' => $f->id]) }}">
+                        <a href="{{ route('formationDetail', ['id' => $f->id]) }}">
                             <img src="{{ asset('assets/images/form/' .$f->cover ) }}"
                                 alt="" class="img-fluid" />
                         </a>
                     </div>
                     <div class="course-details">
-                        <a href="{{ route('detailFormation', ['id' => $f->id]) }}" class="course-title">{{$f->title}}</a>
+                        <a href="{{ route('formationDetail', ['id' => $f->id]) }}" class="course-title">{{$f->title}}</a>
 
                         <div class="course-subtitle d-none d-md-block">
                         {{ Str::limit($f->description) }}
@@ -45,19 +45,19 @@
                                         @if  ($loop->first)
                                         <img style="margin-left: 0px;" class="position-absolute"
                                             src="{{ asset('assets/images/form/' . $fr->profil) }}"
-                                            width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            width="30px" height="30px" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ $fr->prenom." ".$fr->name }}"
                                             onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
-                                            
+
                                         @else
                                         <img style="margin-left: 17px;" class="position-absolute"
                                         src="{{ asset('assets/images/form/' . $fr->profil) }}"
-                                        width="30px" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        width="30px" height="30px" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ $fr->prenom." ".$fr->name }}"
                                         onclick="event.preventDefault(); $(location).attr('href', '{{ route('formateur', ['id' => $fr->id]) }}');" />
-                                        
+
                                         @endif                                            @empty
-                                            
+
                                             @endforelse
                                         </div>
                                 </div>
@@ -99,9 +99,9 @@
                     </div>
                 </div>
             </li>
-                
+
             @empty
-                
+
             @endforelse
         </ul>
     </div>

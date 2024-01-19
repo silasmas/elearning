@@ -167,7 +167,7 @@
                     <div class="about-instructor-title">
                         Formateurs
                     </div>
-                    @forelse ($detail->user as $f)
+                    @forelse ($detail->formateur as $f)
 
                     <div class="row justify-content-center">
 
@@ -182,7 +182,8 @@
                         </div>
 
                         <div class="col-md-8 top-instructor-details text-center text-md-start">
-                            <h4 class="mb-1 fw-600 v"><a class="text-decoration-none" href="#">
+                            <h4 class="mb-1 fw-600 v"><a class="text-decoration-none"
+                                    href="{{ route('formateur',['id'=>$f->id]) }}">
                                     {{ $f->prenom . ' ' . $f->name }}
                                 </a></h4>
                             <p class="fw-500 text-14px w-100"></p>
@@ -203,7 +204,7 @@
                         </div>
                     </div><br>
                     @empty
-                    <h1>Aucun coach</h1>
+                    <h1>Aucun formateur</h1>
 
                     @endforelse
 
@@ -242,40 +243,33 @@
 
 
                         <div class="buy-btns">
+                            @if (!Auth::guest())
                             @switch(checkStepForm($detail->id))
-                                @case("en cours")
-                                <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn green radius-10"
-                                    onclick="handleEnrolledButton()">
-                                    @lang('general.autre.continuer')
-                                </a>
-                                    @break
-                                @case("fini")
-                                <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn red radius-10"
-                                    onclick="handleEnrolledButton()">
-                                    @lang('general.autre.btnfini')
-                                </a>
-                                    @break
-                                @default
-                                <a class="btn btn-buy-now" href="{{ route('beginForm',['id'=>$detail->id]) }}" id="12">
-                                    Commencer
-                                </a>
-
-                            @endswitch
-                            {{-- @if ($userForm->formation->pluck('formation_id')->contains($detail->id))
-                            <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn warning radius-10"
+                            @case("en cours")
+                            <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn green radius-10"
                                 onclick="handleEnrolledButton()">
-                                @if (checkStepForm($detail->id)->evolution==)
                                 @lang('general.autre.continuer')
-                                @else
-                                @lang('general.autre.btnfini')
-                                @endif
                             </a>
+                            @break
+                            @case("fini")
+                            <a href="{{ route('cours',['id'=>$detail->id]) }}" class="btn red radius-10"
+                                onclick="handleEnrolledButton()">
+                                @lang('general.autre.btnfini')
+                            </a>
+                            @break
+                            @default
+                            <a class="btn btn-buy-now" href="{{ route('beginForm',['id'=>$detail->id]) }}" id="12">
+                                Commencer
+                            </a>
+                            @endswitch
                             @else
-
-                            @endif --}}
+                            <a class="btn btn-buy-now" href="{{ route('beginForm',['id'=>$detail->id]) }}" id="12">
+                                Commencer
+                            </a>
+                            @endif
                         </div>
                         <div class="buy-btns">
-
+                            @if (!Auth::guest())
                             <button class="{{$userForm->favorie->pluck('formation_id')->contains($detail->id)?" btn
                                 red":"btn btn-add-wishlist" }}" type="button" onclick="handleWishList3(this)"
                                 id="{{ $detail->id }}">
@@ -285,6 +279,11 @@
                                 {{ 'Ajouter dans vos favories' }}
                                 @endif
                             </button>
+                            @else
+                            <button class=" btn red" type="button" onclick="handleWishList4()"
+                                id="{{ $detail->id }}">Ajouter dans vos favories
+                            </button>
+                            @endif
                         </div>
 
 

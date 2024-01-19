@@ -3,391 +3,235 @@
 
 
 @section("content")
+ <!-- body overlay area start -->
+ <div class="body_overlay"></div>
+ <!-- body overlay area end -->
 
-<!--start hero area-->
-<section class="hero-area four">
-    <div class="container">
-        <div class="caption-content text-center">
-            <h4>Start learning from home</h4>
-            <h2>Connect With Our Expert And Start Learning Today</h2>
-            <p>We are providing high-quality online courses to improve your skill. Our all instructors are highly experienced and experts.</p>
-            <ul>
-                <li><a href="#">Voir les formations</a></li>
-            </ul>
-        </div>
-    </div>
-</section>
-<!--end hero area-->
-<!--start discount area-->
-<section class="discount-area-two">
-    <div class="container">
-        <div class="discount-wrap three">
-            <!--start discount-image-->
-            <div class="discount-img">
-                <img src="{{ asset('assets/images/imgs/i1.jpg') }}" class="img-fluid" alt="image">
-            </div>
-            <!--end discount-image-->
-            <!--start discount-content-->
-            <div class="discount-cont three">
-                <h4>Limited time offer</h4>
-                <h2>50% Discount On All Of Our New & Upcoming Courses</h2>
-                <div id="countdown"></div>
-                <div class="btn-default">
-                    <a href="#">Enroll Now</a>
-                </div>
-            </div>
-            <!-- end discount-content -->
-        </div>
-    </div>
-</section>
-<!--end discount-area-->
-<!--start course area-->
-<section class="course-area three">
-    <div class="container">
-        <div class="row">
-            <!--start heading-->
-            <div class="col-lg-8 offset-lg-2">
-                <div class="sec-heading text-center">
-                    <h4>Formations</h4>
-                    <h2>Celles qui sont recement publiée</h2>
-                </div>
-            </div>
-            <!--end heading-->
-        </div>
-        <div class="row">
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i1.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">Gratuit</span>
-                        <h3 class="course-title">
-                            <a href="#">Nutrition: Build Your Perfect Diet & Meal Plan</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <span class="course-rating-count">(1 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 04h </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 5</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i2.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">Gratuit</span>
-                        <h3 class="course-title">
-                            <a href="#">WordPress Master Class for Beginners</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </span>
-                            <span class="course-rating-count">(2 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 07h 30m </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i7.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">Free</span>
-                        <h3 class="course-title">
-                            <a href="#">The Complete JavaScript Course 2022</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <span class="course-rating-count">(7 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 13h 20m 20s </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i1.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">Gratuit</span>
-                        <h3 class="course-title">
-                            <a href="#">Ultimate Photoshop Training: From Beginner</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-                            <span class="course-rating-count">(1 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 13h 20m 20s </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i4.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">$12.00</span>
-                        <h3 class="course-title">
-                            <a href="#">User Experience Design Essentials</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <span class="course-rating-count">(1 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 15h 20m </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 5</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-            <!--start course card-->
-            <div class="col-lg-4 col-md-6">
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/imgs/i5.jpg') }}" class="img-fluid" alt="image">
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <span class="course-price">Gratuit</span>
-                        <h3 class="course-title">
-                            <a href="#">Complete Blender Creator: Learn 3D Modelling</a>
-                        </h3>
-                        <div class="course-rating">
-                            <span class="star-rating-group">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <span class="course-rating-count">(3 Review)</span>
-                        </div>
-                        <div class="course-content-footer">
-                            <ul>
-                                <li class="course-duration"><i class="fa fa-clock-o"></i> 15h 20m </li>
-                                <li class="course-user"><i class="fa fa-user-o"></i> 5</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end course card-->
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="category-btn btn-default text-center">
-                    <a href="#">Voir plus</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--end course area-->
+ <!-- slider area start -->
+ <div class="slider-area owl-carousel has-color">
+     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-7 col-md-9">
+                     <div class="slider-content">
+                         <h3>admission ‘ 20</h3>
+                         <h1><span class="primary-color" >Your bright future</span> is Our Mission</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore</p>
+                         <a class="btn btn-primary btn-round btn-lg mt-5" href="#">Start Learning Now</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-7 col-md-9">
+                     <div class="slider-content">
+                         <h3>admission ‘ 20</h3>
+                         <h1><span class="primary-color" >Your bright future</span> is Our Mission</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore</p>
+                         <a class="btn btn-primary btn-round btn-lg mt-5" href="#">Start Learning Now</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-7 col-md-9">
+                     <div class="slider-content">
+                         <h3>admission ‘ 20</h3>
+                         <h1><span class="primary-color" >Your bright future</span> is Our Mission</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore</p>
+                         <a class="btn btn-primary btn-round btn-lg mt-5" href="#">Start Learning Now</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- slider area end -->
 
-<!--start why choose area-->
-<section class="why-choose-area two">
+<!-- about area start -->
+<div class="about-area ptb--120">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="why-choose-img">
-                    <img src="{{ asset('assets/images/imgs/i8.jpg') }}" class="img-fluid" alt="image">
+                <div class="about-left-content">
+                    <div class="section-title">
+                        <span class="text-uppercase">about us</span>
+                         <h2>Welcome to</h2><h2><span>Our </span> <span class="primary-color">university</span></h2>
+                    </div>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    <a class="btn btn-primary btn-round" href="#">Read more</a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="why-choose-cont-wrap">
-                    <div class="sec-heading">
-                        <h4>Pourquoi se faire former?</h4>
-                        <h2>We Are Providing The Best Quality Online Courses</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
+                <div class="abt-right-thumb">
+                    <div class="abt-rt-inner">
+                        <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
                     </div>
-                    <!--start choose single-->
-                    <div class="why-choose-single">
-                        <div class="why-choose-icon">
-                            <img src="assets/images/icons/ribbon.svg" alt="image">
-                        </div>
-                        <div class="why-choose-cont">
-                            <h3>High Quality Courses</h3>
-                            <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.</p>
-                        </div>
-                    </div>
-                    <!--end choose single-->
-                    <!--start choose single-->
-                    <div class="why-choose-single">
-                        <div class="why-choose-icon">
-                            <img src="assets/images/icons/teacher.svg" alt="image">
-                        </div>
-                        <div class="why-choose-cont">
-                            <h3>Expert Instructors</h3>
-                            <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.</p>
-                        </div>
-                    </div>
-                    <!--end choose single-->
-                    <!--start choose single-->
-                    <div class="why-choose-single mb-0">
-                        <div class="why-choose-icon">
-                            <img src="assets/images/icons/folder.svg" alt="image">
-                        </div>
-                        <div class="why-choose-cont">
-                            <h3>Life Time Access</h3>
-                            <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim.</p>
-                        </div>
-                    </div>
-                    <!--end choose single-->
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!--end why choose area-->
-
-<!--start newsletter area-->
-<section class="newsletter-area overlay bg-cover two bg">
+</div>
+<!-- about area end -->
+<!-- events area start -->
+<div class="event-area  pt--120 pb--80">
     <div class="container">
         <div class="row">
-            <!--start sec-heading-->
-            <div class="col-lg-10 offset-lg-1">
-                <div class="sec-heading text-center">
-                    <h4>Newsletter</h4>
-                    <h2 class="text-white">Get Latest & Update News</h2>
+            <div class="col-md-8">
+                <div class="section-title">
+                    <span class="text-uppercase">Join with us</span>
+                    <h2>Upcoming Events to </h2>
                 </div>
             </div>
-            <!--end sec-heading-->
         </div>
         <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1">
-                <div class="subscribe-form">
-                    <form>
-                        <input type="email" placeholder="Your email address">
-                        <button type="submit">Subscribe Now</button>
-                    </form>
-                </div>
+            @forelse ($parCategorie as $fr)
+            <div class="col-md-6">
+                <div class="media align-items-center mb-5">
+                    <div class="media-head primary-bg">
+                        <span><sub>MAR</sub>25</span>
+                        <p>2018</p>
+                    </div>
+                    <div class="media-body">
+                        <h4><a href="{{ route('formBy',['id'=>"categorie&$fr->categorie"]) }}">{{ $fr->categorie }}</a></h4>
+                        <p><i class="fa fa-clock-o"></i>{{ $fr->count }} Formation{{s($fr->count)}}</p>
+                    </div>
+                </div> <!-- media -->
             </div>
-        </div>
-    </div>
-</section>
-<!--end newsletter area-->
 
-<!--start instruction area-->
-<section class="instruction-area">
+            @empty
+
+            @endforelse
+            <!-- col-md-6 -->
+        </div><!-- row -->
+    </div><!-- container -->
+</div><!-- event-area -->
+
+ <!-- course area start -->
+ <div class="course-area  pt--120 pb--70">
     <div class="container">
         <div class="row">
-            <!--start instruction-single-->
             <div class="col-md-6">
-                <div class="instruction-single">
-                    <div class="instruction-img">
-                        <img src="{{ asset('assets/images/imgs/i1.jpg') }}" class="img-fluid" alt="image">
-                    </div>
-                    <div class="instruction-cont text-center">
-                        <h3>Devenir formateur</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                    </div>
-                    <div class="instruction-btn text-center">
-                        <a href="#">Formez pour former</a>
-                    </div>
+                <div class="section-title">
+                    <span class="text-uppercase">Build your career</span>
+                    <h2>Featured Courses </h2>
                 </div>
             </div>
-            <!--end instruction-single-->
-            <!--start instruction-single-->
-            <div class="col-md-6">
-                <div class="instruction-single">
-                    <div class="instruction-img">
-                        <img src="{{ asset('assets/images/imgs/s3.jpg') }}" class="img-fluid" alt="image">
-                    </div>
-                    <div class="instruction-cont text-center">
-                        <h3>Devenir GAEL</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                    </div>
-                    <div class="instruction-btn text-center">
-                        <a href="#">Inscription gratuite</a>
-                    </div>
+        </div>
+
+        <div class="commn-carousel owl-carousel card-deck">
+        @forelse ($formations as $f)
+            <div class="card mb-5">
+                <div class="course-thumb">
+                    <img src="{{asset('assets/images/form/'.$f->cover) }}" alt="image">
+                    <span class="cs-price primary-bg">Gratuit</span>
                 </div>
+                <div class="card-body  p-25">
+                    <div class="course-meta-title mb-4">
+                        <div class="course-meta-text">
+                            <h4><a href="{{ route('detailFormation',['id'=>$f->id]) }}">{{ $f->title }}</a></h4>
+                            <ul class="course-meta-stats">
+                                <li><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
+                                <li>36 <i class="fa fa-comment"></i></li>
+                                <li>85 <i class="fa fa-heart"></i></li>
+                            </ul>
+                        </div>
+                        @forelse ($f->formateur as $fr)
+                        <a href="{{route('formateur', ['id' => $fr->id]) }}"><img class="course-meta-thumbnail rounded-circle" width="50" height="50" src="{{asset("assets/images/form/".$fr->profil) }}" alt="image"> </a>
+
+                        @empty
+
+                        @endforelse
+                    </div>
+                    <p>{{ Str::limit($f->description, 100, '...') }}</p>
+                    <ul class="course-meta-details list-inline  w-100">
+                        <li>
+                         <p>Course</p>
+                         <span>3 Year</span>
+                        </li>
+                        <li>
+                         <p>Class Size</p>
+                          <span>18</span>
+                        </li>
+                        <li>
+                         <p>Duration</p>
+                          <span>1 hour</span>
+                        </li>
+                    </ul>
+              </div><!-- card-body -->
             </div>
-            <!--end instruction-single-->
+            <!-- card -->
+
+            @empty
+
+            @endforelse
         </div>
     </div>
-</section>
-<!--end instruction area-->
+</div>
+<!-- course area end -->
 
+ <!-- take toure area start -->
+ <div class="take-toure-area ptb--120">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="section-title sec-style-two">
+                    <img class="title-top-shape" src="{{ asset('client/assets/ouvert/images/icon/title-top-shape.png') }}" alt="image">
+                    <span class="text-uppercase">Faire une Visite</span>
+                    <h2>Video de présentation</h2>
+                </div>
+            </div>
+        </div>
+        <div class="video-area">
+            <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
+        </div>
+    </div>
+</div>
+<!-- take toure area end -->
 
+ <!-- teacher area start -->
+ <div class="teacher-area pb--70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6">
+                <div class="section-title">
+                    <span class="text-uppercase">Learn from best</span>
+                    <h2>Our Teachers</h2>
+                </div>
+            </div>
+        </div>
+        <div class="commn-carousel owl-carousel card-deck">
+            @forelse ($formateurs as $form)
+            <div class="card mb-5">
+              <img src="{{asset("assets/images/form/".$form->profil) }}" style="width: 370px!important; heigth: 270px   !important" alt="image">
+              <div class="card-body teacher-content p-25">
+                <h4 class="card-title mb-4"><a href="{{ route('formateur',['id'=>$form->id]) }}">{{ $form->prenom.'-'.$form->name }}</a></h4>
+                <span class="primary-color font-italic d-block mb-3">
+                    {{ Str::limit($form->biographie, 100, '...') }}
+                </span>
+                <p class="card-text"></p>
+                <ul class="list-inline">
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+
+            @empty
+
+            @endforelse
+          <!-- card -->
+        </div>
+    </div>
+</div>
+<!-- teacher area end -->
+
+<!-- events area end -->
 @endsection

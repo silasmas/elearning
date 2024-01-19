@@ -4,12 +4,12 @@
         <div class="container-xl">
             <div class="row mt-3 py-1">
                 <div class="col-6 col-sm-6 col-md-3 text-muted text-13px">
-                    &copy; 2022 Cado, All rights reserved
+                    &copy; 2022 GAEL, All rights reserved
                 </div>
 
                 <div class="col-6 col-sm-6 col-md-3 d-none d-md-block"></div>
                 <div class="col-6 col-sm-6 col-md-3 d-none d-md-block"></div>
-                <div class="col-6 col-sm-6 col-md-3 text-center text-md-start">
+                {{-- <div class="col-6 col-sm-6 col-md-3 text-center text-md-start">
                     <select class="language_selector" onchange="switch_language(this.value)">
                         <option value="arabic">Arabic</option>
                         <option value="english" selected>English</option>
@@ -22,7 +22,7 @@
                         <option value="spanish">Spanish</option>
                         <option value="turkish">Turkish</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

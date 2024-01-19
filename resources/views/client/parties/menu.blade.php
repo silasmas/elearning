@@ -1,131 +1,81 @@
-<div class="sidebar-wrap">
-    <div class="sidebar-inner">
-        <div class="sidebar-close">
-            <div class="sidebar-close-btn">
-                <i class="fa fa-times"></i>
-            </div>
-        </div>
-        <div class="sidebar-content">
-            <div class="sidebar-logo">
-                <a href="{{ route('home') }}">
-                    <img class="img-fluid" src="{{ asset('assets/images/favicon/favicon.ico') }}" alt="FormationGael">
-                </a>
-            </div>
-            <div class="mobile-menu"></div>
-            <div class="search-form">
-                <input type="text" placeholder="Search Courses" class="form-control">
-                <span><i class="fa fa-search"></i></span>
-            </div>
-            <div class="contact-info">
-                <ul>
-                    <li><i class="fa fa-envelope"></i> support@groupegael.com</li>
-                    <li><i class="fa fa-phone"></i> +98 012345 6789</li>
-                </ul>
-            </div>
-            <div class="social-icon">
-                <ul>
-                    <li><span>Follow Us:</span></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                </ul>
-            </div>
-            <div class="header-log-reg">
-                <ul>
-                    <li><a href="{{ route("login") }}">Connexion</a></li>
-                    {{-- <li><small>|</small></li>
-                    <li><a href="#">Inscription</a></li> --}}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- start header-top-area -->
-<header class="header-area">
-    <div class="header-top-area">
+
+ <!-- header area start -->
+ <header id="header">
+    <!-- header top area start -->
+    <div class="header-top">
         <div class="container">
-            <div class="header-top-wrap">
-                <!--start couser search-->
-                <div class="header-course-search">
-                    <input type="text" placeholder="Search Courses" class="form-control">
-                    <span><i class="fa fa-search"></i></span>
-                </div>
-                <!--end couser search-->
-                <!--start header contact info-->
-                <div class="header-contact-info text-right">
-                    <ul>
-                        <li><i class="fa fa-envelope"></i> support@example.com</li>
-                        <li><i class="fa fa-phone"></i> +98 012345 6789</li>
-                    </ul>
-                </div>
-                <!--end header contact info-->
-                <!--start header-top-social-->
-                <div class="header-top-social text-right">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    </ul>
-                </div>
-                <!--end header-top-social-->
-            </div>
-        </div>
-    </div>
-    <!--end header-top-area-->
-    <!--start header-btm-area-->
-    <div class="header-btm-area">
-        <div class="container">
-            <div class="main-menu-wrap">
-                <!--start site logo-->
-                <div class="site-logo">
-                    <a class="logo" href="#"><img src="{{ asset('assets/images/favicon/FRMT2.jpg') }}" alt="formation GAEL"></a>
-                </div>
-                <!--end site logo-->
-                <!--start mainmenu-->
-                <div class="main-menu-area text-right">
-                    <nav class="mainmenu">
+            <div class="row d-flex flex-center">
+                <div class="col-sm-8">
+                    <div class="ht-address">
                         <ul>
-                            <li class="active"><a href="{{ route('home') }}">Accueil</a></li>
-                            <li><a href="{{ route('about') }}">A propos</a></li>
-                            <li><a href="{{ route('formations') }}">Formations</a></li>
-                            <li><a href="{{ route('contact') }}">Contact</a></li>
+                            <li><i class="fa fa-phone"></i>+ 88 01916 444137</li>
+                            <li><i class="fa fa-envelope"></i>info@example.com</li>
                         </ul>
-                    </nav>
+                    </div>
                 </div>
-                <!--end mainmenu-->
-                <!--start cart icon-->
-                {{-- <div class="header-cart text-center">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i>
-                                <span class="cart-total-number">0</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div> --}}
-                <!--end cart icon-->
-                <!--start login registration btn-->
-                <div class="header-log-reg text-right">
-                    <ul>
-                        @if (!Auth::guest())
-                        <li><a href="{{ route('dashboard') }}">Mon profil</a></li>
-                        @else
-                            <li><a href="{{ route('studenConnect') }}">Connexion</a></li>
-                        @endif
-                    </ul>
+                <div class="col-sm-4">
+                    <div class="ht-social">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <!--end login registration btn-->
-                <!--start toggle button-->
-                <div class="header-toggle-btn">
-                    <a class="sidebar-toggle-btn">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <!--end toggle button-->
             </div>
         </div>
     </div>
+    <!-- header top area end -->
+    <!-- header bottom area start -->
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-bottom-inner">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-sm-9">
+                        <div class="logo">
+                            <a href="index.html"><img width="300" src="{{ asset('assets/images/favicon/ic.png') }}" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 d-none d-lg-block">
+                        <div class="main-menu">
+                            <nav>
+                                <ul id="m_menu_active">
+
+                                    <li class="active"><a href="{{ route('home') }}">Accueil</a></li>
+                                    <li><a href="{{ route('about') }}">A propos</a></li>
+                                    <li><a href="{{ route('formations') }}">Formations</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                    @if (!Auth::guest())
+                                    <li><a href="{{ route('dashboard') }}">Mon profil</a></li>
+                                    @else
+                                        <li><a href="{{ route('studenConnect') }}">Connexion</a></li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-2 col-sm-3">
+                        <div class="hb-right">
+                            <ul>
+                                <li class="search_btn"><i class="fa fa-search"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 d-block d-lg-none">
+                        <div id="mobile_menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header bottom area end -->
 </header>
-<!--end header-->
+<!-- header area end -->
+<!-- offset search area start -->
+<div class="offset-search">
+    <form action="#">
+        <input type="text" name="search" placeholder="Sarch here...">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>

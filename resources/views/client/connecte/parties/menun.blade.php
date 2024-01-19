@@ -40,15 +40,15 @@
             {{-- {{dd(Auth::guest())}} --}}
 
             <div class="ms-auto d-flex align-items-center">
-                @if (!Auth::guest())
                 <div class="instructor-box menu-icon-box">
                     <div class="icon">
-                        <a href="{{ route('dashboard') }}"
-                            style="border: 1px solid transparent; margin: 0px; padding: 0px 10px; font-size: 14px; width: max-content; border-radius: 5px; height: 40px; line-height: 40px;">
-                            @lang('general.menu.home')
-                        </a>
-                    </div>
+                        <a href="{{ !Auth::guest()?route('dashboard'):route('home') }}"
+                        style="border: 1px solid transparent; margin: 0px; padding: 0px 10px; font-size: 14px; width: max-content; border-radius: 5px; height: 40px; line-height: 40px;">
+                        @lang('general.menu.home')
+                    </a>
                 </div>
+            </div>
+            @if (!Auth::guest())
 
                 {{-- debut menu live --}}
                 <div class="instructor-box  menu-icon-box" id="">
@@ -63,7 +63,7 @@
                                     @forelse ($userForm->formation as $fav)
                                     <li>
                                         <div class="item clearfix">
-                                            <div class="item-image"> 
+                                            <div class="item-image">
                                                 <a href="">
                                                     <img src="{{ asset('assets/images/form/' . $fav->cover) }}"
                                                         alt="" class="img-fluid" />
@@ -78,15 +78,15 @@
                                                         GAEL
                                                     </div>
                                                 </a>
+                                                <button  id="" class="addedToCart"
+                                                    onclick="event.preventDefault(); $(location).attr('href', '{{
+                                                        route('cours', ['id' => $fav->id]) }}')">
                                                 @if ($fav->pivot->evolution == 'fini')
-                                                <button id="" class="addedToCart">
                                                     @lang('general.autre.btnfini')
-                                                </button>
-                                                @else
-                                                <button id="" class="addedToCart">
+                                                    @else
                                                     @lang('general.autre.suite')
+                                                    @endif
                                                 </button>
-                                                @endif
 
                                             </div>
                                         </div>

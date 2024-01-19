@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\favori;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorefavoriRequest;
 use App\Http\Requests\UpdatefavoriRequest;
+use App\Models\favori;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class FavoriController extends Controller
 {
@@ -29,6 +30,16 @@ class FavoriController extends Controller
                 return response()->json(['reponse' => false, 'msg' => "erreur !!"]);
             }
         }
+    }
+    public function formateur($id): View
+    {
+        $formateur = User::join('user_formateurs', 'users.id', '=', 'user_formateurs.user_id')
+            ->where('users.id', $id)
+            ->select('users.*')
+            ->with('formations')
+            ->first();
+        //   dd($formateur);
+        return view('client.connecte.pages.formateur', compact("formateur"));
     }
     public function addFavori($id)
     {
