@@ -16,10 +16,9 @@
                 <div class="col-sm-4">
                     <div class="ht-social">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a target="blank" href="https://web.facebook.com/GaelMinistriesOfficial/"><i class="fa fa-facebook"></i></a></li>
+                            {{-- <li><a href=""><i class="fa fa-twitter"></i></a></li> --}}
+                            <li><a target="blank"  href="https://www.youtube.com/watch?v=3SxK9DPMVMU"><i class="fa fa-youtube"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-sm-9">
                         <div class="logo">
-                            <a href="index.html"><img width="300" src="{{ asset('assets/images/favicon/ic.png') }}" alt="logo"></a>
+                            <a href="index.html"><img width="300" src="{{ asset('assets/images/favicon/2PNG.png') }}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 d-none d-lg-block">

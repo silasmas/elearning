@@ -9,7 +9,7 @@
 
  <!-- slider area start -->
  <div class="slider-area owl-carousel has-color">
-     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+     <div class="slider_item" style="background: url(assets/images/imgs/3.jpg) center/cover no-repeat;">
          <div class="container">
              <div class="row">
                  <div class="col-lg-7 col-md-9">
@@ -23,7 +23,7 @@
              </div>
          </div>
      </div>
-     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+     <div class="slider_item" style="background: url(assets/images/imgs/6.jpg) center/cover no-repeat;">
          <div class="container">
              <div class="row">
                  <div class="col-lg-7 col-md-9">
@@ -37,7 +37,21 @@
              </div>
          </div>
      </div>
-     <div class="slider_item" style="background: url(assets/images/imgs/i5.jpg) center/cover no-repeat;">
+     <div class="slider_item" style="background: url(assets/images/imgs/11.jpg) center/cover no-repeat;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-7 col-md-9">
+                     <div class="slider-content">
+                         <h3>admission ‘ 20</h3>
+                         <h1><span class="primary-color" >Your bright future</span> is Our Mission</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore</p>
+                         <a class="btn btn-primary btn-round btn-lg mt-5" href="#">Start Learning Now</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="slider_item" style="background: url(assets/images/imgs/8.jpg) center/cover no-repeat;">
          <div class="container">
              <div class="row">
                  <div class="col-lg-7 col-md-9">
@@ -71,7 +85,7 @@
             <div class="col-lg-6">
                 <div class="abt-right-thumb">
                     <div class="abt-rt-inner">
-                        <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
+                        <a class="expand-video" href="https://www.youtube.com/watch?v=3SxK9DPMVMU"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
@@ -79,39 +93,7 @@
     </div>
 </div>
 <!-- about area end -->
-<!-- events area start -->
-<div class="event-area  pt--120 pb--80">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="section-title">
-                    <span class="text-uppercase">Join with us</span>
-                    <h2>Upcoming Events to </h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @forelse ($parCategorie as $fr)
-            <div class="col-md-6">
-                <div class="media align-items-center mb-5">
-                    <div class="media-head primary-bg">
-                        <span><sub>MAR</sub>25</span>
-                        <p>2018</p>
-                    </div>
-                    <div class="media-body">
-                        <h4><a href="{{ route('formBy',['id'=>"categorie&$fr->categorie"]) }}">{{ $fr->categorie }}</a></h4>
-                        <p><i class="fa fa-clock-o"></i>{{ $fr->count }} Formation{{s($fr->count)}}</p>
-                    </div>
-                </div> <!-- media -->
-            </div>
 
-            @empty
-
-            @endforelse
-            <!-- col-md-6 -->
-        </div><!-- row -->
-    </div><!-- container -->
-</div><!-- event-area -->
 
  <!-- course area start -->
  <div class="course-area  pt--120 pb--70">
@@ -189,7 +171,7 @@
             </div>
         </div>
         <div class="video-area">
-            <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
+            <a class="expand-video" href="https://www.youtube.com/watch?v=3SxK9DPMVMU"><i class="fa fa-play"></i></a>
         </div>
     </div>
 </div>
@@ -232,6 +214,38 @@
     </div>
 </div>
 <!-- teacher area end -->
+<!-- events area start -->
+<div class="event-area  pt--120 pb--80">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="section-title">
+                    <span class="text-uppercase">Join with us</span>
+                    <h2>Upcoming Events to </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @forelse ($parCategorie as $fr)
+            <div class="col-md-6">
+                <div class="media align-items-center mb-5">
+                    <div class="media-head primary-bg">
+                        <span><sub>MAR</sub>25</span>
+                        <p>2018</p>
+                    </div>
+                    <div class="media-body">
+                        <h4><a href="{{ route('formBy',['id'=>"categorie&$fr->categorie"]) }}">{{ $fr->categorie }}</a></h4>
+                        <p><i class="fa fa-clock-o"></i>{{ $fr->count }} Formation{{s($fr->count)}}</p>
+                    </div>
+                </div> <!-- media -->
+            </div>
 
+            @empty
+
+            @endforelse
+            <!-- col-md-6 -->
+        </div><!-- row -->
+    </div><!-- container -->
+</div><!-- event-area -->
 <!-- events area end -->
 @endsection
