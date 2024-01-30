@@ -125,3 +125,10 @@ if (!function_exists('lastChapitre')) {
         }
     }
 }
+if (!function_exists('convertTimeToMinutes')) {
+    function convertTimeToMinutes($time)
+{
+    $parts = explode(':', $time);
+    return ($parts[0] * 60) + $parts[1];
+}
+}

@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\examens;
 use App\Models\chapitre;
 use App\Models\etudiant;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class formation extends Model
 {
@@ -32,5 +33,9 @@ class formation extends Model
     public function chapitre()
     {
         return $this->hasMany(chapitre::class);
+    }
+    public function examen()
+    {
+        return $this->hasMany(examens::class);
     }
 }

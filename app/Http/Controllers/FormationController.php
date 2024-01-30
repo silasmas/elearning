@@ -15,7 +15,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Rules\Password;
@@ -35,7 +34,7 @@ class FormationController extends Controller
         //     ->distinct()
         //     ->groupBy('categorie')
         //     ->get();
-        $categorie = formation::with('chapitre', 'user', "formateur")->where([["is_active", "1"],["categorie",$id],["categorie","!=","atelier"]])->get();;
+        $categorie = formation::with('chapitre', 'user', "formateur")->where([["is_active", "1"], ["categorie", $id], ["categorie", "!=", "atelier"]])->get();
         //   dd($categorie[0]);
         return back()->with('categorie', $categorie);
     }
@@ -261,38 +260,52 @@ class FormationController extends Controller
     }
     public function passerExamen($id)
     {
+        // dd($id);
         $examPret = examens::where("formation_id", $id)->get();
         if ($examPret) {
             $examen = examens::whereNotIn('id', function ($query) {
                 $query->select('examens_id')->from('examen_users')
-                    ->where('user_id', Auth::user()->id);
+                    ->where([['examens_id', 3], ['user_id', Auth::user()->id]]);
             })->inRandomOrder()->first();
+            // dd($examen);
             if ($examen) {
                 $debutExamen = examenUser::updateOrcreate([
                     'examens_id' => $examen->id,
                     'user_id' => Auth::user()->id,
                 ]);
                 if ($debutExamen) {
-                    return response()->json(['reponse' => true, 'msg' => "Vous pouvez passer votre examen"]);
+                    $question = $examen->question;
+                    if ($question != null) {
+                        return response()->json(['reponse' => true, 'msg' => "Vous pouvez passer votre examen"]);
+
+                    } else {
+                        return response()->json(['reponse' => false, 'msg' => "Cet examen n'est pas encore prêt"]);
+
+                    }
+                    // } else {
+                    //     return response()->json(['reponse' => false, 'msg' => "Erreur"]);
+
+                    // }
+
                 } else {
-                    return response()->json(['reponse' => false, 'msg' => "Erreur"]);
+
+                    $pasConclu = examens::whereNotIn('id', function ($query) {
+                        $query->select('examens_id')->from('examen_users')
+                            ->where([['user_id', Auth::user()->id], ['conclusion', "!=", "null"]]);
+                    })->inRandomOrder()->first();
+                    if ($pasConclu) {
+                        return response()->json(['reponse' => true, 'msg' => "Votre examen n'a pas des note, vous pouvez reprendre"]);
+                    } else {
+                        return response()->json(['reponse' => false, 'msg' => "Vous aviez déjà passer cet examen, vous ne pourrez pas le reprendre"]);
+
+                    }
+
                 }
             } else {
-                $pasConclu = examens::whereNotIn('id', function ($query) {
-                    $query->select('examens_id')->from('examen_users')
-                        ->where([['user_id', Auth::user()->id], ['conclusion', "!=", "null"]]);
-                })->inRandomOrder()->first();
-                if ($pasConclu) {
-                    return response()->json(['reponse' => true, 'msg' => "Vous votre examen n'a pas des note, vous pouvez reprendre"]);
-                } else {
-                    return response()->json(['reponse' => false, 'msg' => "Vous aviez déjà passer cet examen, vous ne pourrez pas le reprendre"]);
-
-                }
-
+                return response()->json(['reponse' => false, 'msg' => "L'examen 2 pour cette formation n'est pas encore programmé, merci de contacter la coordination!!"]);
             }
-
         } else {
-            return response()->json(['reponse' => false, 'msg' => "L'examen pour cette formation n'est pas encore programmé, merci de contacter la coordination!!"]);
+            return response()->json(['reponse' => false, 'msg' => "L'examen 1 pour cette formation n'est pas encore programmé, merci de contacter la coordination!!"]);
         }
     }
     public function beginForm($id)

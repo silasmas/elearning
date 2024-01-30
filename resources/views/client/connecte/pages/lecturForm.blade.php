@@ -53,6 +53,7 @@
                             {{ $chapitre->description }}
                         </p>
                         <div class=" border-top " style="margin-right: 50px; margin-top:50px">
+                            @if ($detail->categorie!='atelier')
                             <p class="card-text">
                                 A la fin de votre lecture, cliquez sur terminer afin d'enregistrer la fin de ce chapitre
                             </p>
@@ -60,6 +61,8 @@
                                 class="btn btn-danger text-center mt-3">Terminer</button>
                             <button type="submit" id='{{ $detail->id }}' onclick="passerExamen(this)"
                                 class="btn green text-center mt-3">Passer aux examens</button>
+
+                            @endif
                         </div>
                     </div>
                 </div>

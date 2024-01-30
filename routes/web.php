@@ -37,7 +37,7 @@ Route::get('formateur/{id}', [FavoriController::class, 'formateur'])->name('form
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [FormationController::class, 'dashbord'])->name('dashboard');
     Route::get('/cours/{id}', [FormationController::class, 'cours'])->name('cours');
-    // Route::get('/formateur/{id}', [FormationController::class, 'show'])->name('formateur');
+    Route::get('/resultat/{id}', [ExamensController::class, 'resultat'])->name('resultat');
     Route::get('/addFavori/{id}', [FavoriController::class, 'index'])->name('addFavori');
     Route::get('/chapitre/{id}/{idc}', [FormationController::class, 'chapitre'])->name('chapitre');
     Route::get('finiChapitre/{id}', [FormationController::class, 'finiChapitre'])->name('finiChapitre');

@@ -42,13 +42,13 @@
                                 <ul id="m_menu_active">
 
                                     <li class="active"><a href="{{ route('home') }}">Accueil</a></li>
-                                    <li><a href="{{ route('about') }}">A propos</a></li>
+                                    {{-- <li><a href="{{ route('about') }}">A propos</a></li> --}}
                                     <li><a href="{{ route('formations') }}">Formations</a></li>
-                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                    {{-- <li><a href="{{ route('contact') }}">Contact</a></li> --}}
                                     @if (!Auth::guest())
-                                    <li><a href="{{ route('dashboard') }}">Mon profil</a></li>
+                                    <li><a href="{{ route('dashboard') }}" class="btn btn-primary btn-round btn-lg">Mon profil</a></li>
                                     @else
-                                        <li><a href="{{ route('studenConnect') }}">Connexion</a></li>
+                                        <li><a href="{{ route('studenConnect') }}" class="btn btn-primary btn-round btn-lg">Connexion</a></li>
                                     @endif
                                 </ul>
                             </nav>

@@ -553,12 +553,11 @@
         });
         var form = {{ session()->has('categorie') ? 'true' : 'false' }};
         if(form){
+            window.onload = function() {
 
+                document.getElementById('formations').scrollIntoView();
+            };
         }
-        window.onload = function() {
-
-            document.getElementById('formations').scrollIntoView();
-        };
 
 </script>
 @endsection

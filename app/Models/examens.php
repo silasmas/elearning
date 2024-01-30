@@ -21,4 +21,8 @@ class examens extends Model
     {
         return $this->hasMany(questionresponse::class);
     }
+    public function formation()
+    {
+        return $this->belongsTo(formation::class);
+    }
 }

@@ -8,16 +8,17 @@
 <section class="my-courses-area">
     <div class="container">
         <div class="content-title-box">
-            <h1>Temps imparti :{{ $temps }}</h1>
-            <h1 class="title" data-temps="{{ $temps }}" id="temps-restant">Temps restant : {{ $temps }}</h1>
-            <div class="subtitle">Ajoutez des informations vous concernant à partager sur votre
-                profil.</div>
+            <h1>Temps imparti :{{ $temps }} minutes</h1>
+            {{-- --}}
+            <h1 class="title" data-temps="{{ $temps }}" id="timer">Temps restant : 00:00</h1>
+
             @include('client.connecte.parties.error')
         </div>
-        <form action="{{ url('SendExam') }}" method="post" class='form-group' data-parsley-validate>
+        <form action="{{ url('SendExam') }}" method="post" class='form-group' name="formexam" data-parsley-validate>
             @csrf
             <div class="user-dashboard-content">
                 <div class="content-box">
+                    <input type="text" value="{{ $examen->id }}" name="idexam" hidden>
                     <div class="basic-group">
                         @forelse ($questions as $id => $qrr)
                         @forelse ($qrr as $q)
@@ -25,42 +26,42 @@
                             <label for="FristName">{{ $q->question}}</label><br>
                             @switch($loop->parent->iteration)
                             @case(1)
-                            {!! question($q->reponsevrai,$q->ponderation,"q1") !!}
-                            {!! question($q->reponse1,$q->ponderation,"q1") !!}
-                            {!! question($q->reponse4,$q->ponderation,"q1") !!}
-                            {!! question($q->reponse2,$q->ponderation,"q1") !!}
-                            {!! question($q->reponse3,$q->ponderation,"q1") !!}
+                            {!! question($q->reponsevrai,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse1,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse4,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse2,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse3,$q->ponderation,"q-".$q->id) !!}
 
                             @break
                             @case(2)
-                            {!! question($q->reponse1,$q->ponderation,"q2") !!}
-                            {!! question($q->reponse2,$q->ponderation,"q2") !!}
-                            {!! question($q->reponsevrai,$q->ponderation,"q2") !!}
-                            {!! question($q->reponse3,$q->ponderation,"q2") !!}
-                            {!! question($q->reponse4,$q->ponderation,"q2") !!}
+                            {!! question($q->reponse1,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse2,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponsevrai,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse3,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse4,$q->ponderation,"q-".$q->id) !!}
                             @break
                             @case(3)
-                            {!! question($q->reponse1,$q->ponderation,"q3") !!}
-                            {!! question($q->reponse2,$q->ponderation,"q3") !!}
-                            {!! question($q->reponse4,$q->ponderation,"q3") !!}
-                            {!! question($q->reponse3,$q->ponderation,"q3") !!}
-                            {!! question($q->reponsevrai,$q->ponderation,"q3") !!}
+                            {!! question($q->reponse1,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse2,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse4,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse3,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponsevrai,$q->ponderation,"q-".$q->id) !!}
                             @break
                             @case(4)
-                            {!! question($q->reponse1,$q->ponderation,"q4") !!}
-                            {!! question($q->reponsevrai,$q->ponderation,"q4") !!}
-                            {!! question($q->reponse3,$q->ponderation,"q4") !!}
-                            {!! question($q->reponse4,$q->ponderation,"q4") !!}
-                            {!! question($q->reponse2,$q->ponderation,"q4") !!}
+                            {!! question($q->reponse1,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponsevrai,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse3,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse4,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse2,$q->ponderation,"q-".$q->id) !!}
 
                             @break
                             @case(5)
 
-                            {!! question($q->reponse1,$q->ponderation,"q5") !!}
-                            {!! question($q->reponse2,$q->ponderation,"q5") !!}
-                            {!! question($q->reponse3,$q->ponderation,"q5") !!}
-                            {!! question($q->reponse4,$q->ponderation,"q5") !!}
-                            {!! question($q->reponsevrai,$q->ponderation,"q5") !!}
+                            {!! question($q->reponse1,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse2,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse3,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponse4,$q->ponderation,"q-".$q->id) !!}
+                            {!! question($q->reponsevrai,$q->ponderation,"q-".$q->id) !!}
                             @break
                             @endswitch
 
@@ -119,77 +120,57 @@
         }
 
 
-        // Fonction pour mettre à jour le compte à rebours
-// function updateCountdown() {
-//   // Mettre à jour le temps restant en millisecondes
-//   remainingTimeInMilliseconds -= 1000; // Décrémenter d'une seconde (1000 millisecondes)
+        var timeInMinutes = {{ $temps  }};
+            var currentTime = Date.parse(new Date());
+            var deadline = new Date(currentTime + timeInMinutes*60*1000);
 
-//   if (remainingTimeInMilliseconds <= 0) {
-//     // Le compte à rebours est terminé
-//     clearInterval(intervalId); // Arrêter la mise à jour du compte à rebours
-//     console.log("Le compte à rebours est terminé !");
-//   } else {
-//     // Convertir le temps restant en heures, minutes et secondes
-//     var hours = Math.floor(remainingTimeInMilliseconds / (1000 * 60 * 60));
-//     var minutes = Math.floor((remainingTimeInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-//     var seconds = Math.floor((remainingTimeInMilliseconds % (1000 * 60)) / 1000);
+            function getTimeRemaining(endtime){
+                var total = Date.parse(endtime) - Date.parse(new Date());
+                var seconds = Math.floor( (total/1000) % 60 );
+                var minutes = Math.floor( (total/1000/60) % 60 );
 
-//     // Mettre à jour l'interface utilisateur avec le temps restant
-//     console.log("Temps restant : " + hours + "h " + minutes + "m " + seconds + "s");
-//   }
-// }
+                return {
+                    'total': total,
+                    'minutes': minutes,
+                    'seconds': seconds
+                };
+            }
 
-        var timeString = "{{ $temps }}"; // Remplacez cela par votre chaîne de date
-        // Séparer la chaîne de temps en heures, minutes et secondes
-var timeParts = timeString.split(":");
+            function initializeClock(id, endtime){
+                var clock = document.getElementById(id);
+                function updateClock(){
+                    var t = getTimeRemaining(endtime);
 
-console.log("temps: " + timeParts);
-var hours = parseInt(timeParts[0], 10);
-var minutes = parseInt(timeParts[1], 10);
-var secondes = parseInt(timeParts[2], 10);
-// Convertir le temps en millisecondes
-var tempsActuel = (hours * 60 * 60 + minutes * 60 + secondes) * 1000;
-         // Récupérer la valeur du temps à partir de l'attribut data
-    // var tempsActuel = Date.parse(remainingTimeInMilliseconds); // Convertir la date en millisecondes
+                    clock.innerHTML = 'Temps restant : ' + t.minutes + ':' + ('0' + t.seconds).slice(-2);
 
-    // Utiliser le temps restant en millisecondes comme vous le souhaitez
-console.log("Temps restant en millisecondes : " + tempsActuel);
+                    if (t.total <= timeInMinutes * 60 * 1000 / 2) {
+                        clock.style.color = 'red';
+                    } else {
+                        clock.style.color = 'black';
+                    }
+                    if(t.total <= 0){
+                        clearInterval(timeinterval);
+                        clock.innerHTML = 'Le temps est écoulé!!';
+                        clock.style.color = 'red';
+                        document.body.style.pointerEvents = 'none'; // Bloque la page
+                        swal({
+                            title: 'Le temps imparti est fini.',
+                            icon: 'error'
+                        })
+                        // Faire attendre l'action suivante pendant 5 secondes
+                        var form={{ $examen->id }};
+                        var urls='/resultat/'+form+"&time";
+                        setTimeout(function() {
+                            window.location.href=urls; // Remplacez par l'URL de la page vers laquelle vous souhaitez rediriger l'utilisateur
+                        }, 5000); // 5000 millisecondes = 5 secondes
 
-var intervalId = setInterval(updateCountdown, 1000);
+                    }
+                }
 
-    function updateCountdown() {
-        tempsActuel--;
-        if (tempsActuel <= 0) {
-            clearInterval(intervalId);
-            alert("Le temps est écoulé !");
-            // Soumettre automatiquement le formulaire lorsque le temps est écoulé
-            document.querySelector('form').submit();
-        } else {
-            var minutes = Math.floor(tempsActuel / 60);
-            var seconds = tempsActuel % 60;
-            document.getElementById('temps-restant').innerText = "Temps restant : " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-        }
-    }
-// Mettre à jour le temps restant toutes les secondes
-// var interval = setInterval(function() {
-//     var maintenant = new Date().getTime(); // Récupérer le temps actuel
-//     var tempsRestant = tempsActuel - maintenant; // Calculer le temps restant en millisecondes
+                updateClock(); // run function once at first to avoid delay
+                var timeinterval = setInterval(updateClock,1000);
+            }
 
-//     // Convertir le temps restant en heures, minutes, secondes
-//     // var heures = Math.floor((tempsRestant % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//     // var minutes = Math.floor((tempsRestant % (1000 * 60 * 60)) / (1000 * 60));
-//     // var secondes = Math.floor((tempsRestant % (1000 * 60)) / 1000);
-//     var heures = Math.floor(tempsRestant / (1000 * 60 * 60));
-//     var minutes = Math.floor((tempsRestant % (1000 * 60 * 60)) / (1000 * 60));
-//     var secondes = Math.floor((tempsRestant % (1000 * 60)) / 1000);
-//     // Afficher le temps restant dans la balise HTML
-//     document.getElementById("temps-restant").innerHTML = "Temps restant :"+heures + "h " + minutes + "m " + secondes + "s ";
-
-//     // Arrêter le compte à rebours lorsque le temps est écoulé
-//     // if (tempsRestant < 0) {
-//     //     clearInterval(interval);
-//     //     document.getElementById("temps-restant").innerHTML = "Temps écoulé";
-//     // }
-// }, 1000); // Mettre à jour toutes les secondes
+            initializeClock('timer', deadline);
 </script>
 @endsection
