@@ -22,17 +22,102 @@
                 <div class="mobile-overlay"></div>
 
                 <ul class="mobile-main-nav">
+                    @if(!Auth::guest() && Auth::user()->admin==0 )
                     <li class="mobile-menu-helper-top"></li>
-                    {{-- <li class="has-children text-nowrap fw-bold">
+                    <li class="has-children text-nowrap fw-bold">
                         <a href="">
-                            <i class="fas fa-th d-inline text-20px"></i>
-                            <span class="fw-500">@lang('general.menu.titreMenu')</span>
-                            <span class="has-sub-category"><i class="fas fa-angle-right"></i></span>
+                            <i class="fas fa-th d-inline text-20px" style="color: #FFF"></i>
+                            <span class="fw-500" style="color: #FFF">Dashboard</span>
+                            <span class="has-sub-category" style="color: #FFF"><i class="fas fa-angle-right"></i></span>
                         </a>
 
+                        <ul class="category corner-triangle top-left is-hidden pb-0">
+                            <li class="go-back">
+                                <a href=""><i class="fas fa-angle-left"></i>Menu</a>
+                            </li>
+{{--
+                            <li class="has-children">
+                                <a href="#" class="py-2">
+                                    <span class="icon"><i class="fas fa-pencil-square-o"></i></span>
+                                    <span>Gestion des examens</span>
+                                    <span class="has-sub-category"><i class="fas fa-angle-right"></i></span>
+                                </a>
+                                <ul class="sub-category is-hidden">
+                                    <li class="go-back-menu">
+                                        <a href=""><i class="fas fa-angle-left"></i>Menu</a>
+                                    </li>
+                                    <li class="go-back">
+                                        <a href="">
+                                            <i class="fas fa-angle-left"></i>
+                                            <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+                                           Menu
+                                        </a>
+                                    </li>
+                                    <li><a href="#">Liste des examens</a></li>
+                                    <li><a href="#">Enregistrer un examen</a></li>
+                                    <li><a href="#">Notes des examens</a></li>
 
-                    </li> --}}
+                                </ul>
+                            </li> --}}
+                        <li class="has-children">
+                            {{-- <a href="#" class="py-2">
+                                <span class="icon"><i class="fas fa-book"></i></span>
+                                <span>Gestion des formations</span>
+                                <span class="has-sub-category"><i class="fas fa-angle-right"></i></span>
+                            </a>
+                                <ul class="sub-category is-hidden">
+                                    <li class="go-back-menu">
+                                        <a href=""><i class="fas fa-angle-left"></i>Menu</a>
+                                    </li>
+                                    <li class="go-back">
+                                        <a href="">
+                                            <i class="fas fa-angle-left"></i>
+                                            <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+                                           Menu
+                                        </a>
+                                    </li>
+                                    <li><a href="#">Liste des formations</a></li>
+                                    <li><a href="#">Liste des catégories</a></li>
+                                  </ul>
+                            </li>
+                            <li class="has-children">
+                                <a href="#" class="py-2">
+                                    <span class="icon"><i class="fas fa-male"></i></span>
+                                    <span>Gestion des membres</span>
+                                    <span class="has-sub-category"><i class="fas fa-angle-right"></i></span>
+                                </a>
+                                <ul class="sub-category is-hidden">
+                                    <li class="go-back-menu">
+                                        <a href=""><i class="fas fa-angle-left"></i>Menu</a>
+                                    </li>
+                                    <li class="go-back">
+                                        <a href="">
+                                            <i class="fas fa-angle-left"></i>
+                                            <span class="icon"><i class="fas fa-male"></i></span>
+                                            User Experience
+                                        </a>
+                                    </li>
+                                    <li><a href="{{ route('gestionprof') }}">Liste des professeurs</a></li>
+                                    <li><a href="{{ route('gestionstudent') }}">Liste des étudiants</a></li>
+                                    <li><a href="{{ route('gestionrole') }}">Gestion des rôles</a></li>
+                                </ul>
+                            </li>
+                            <li class="all-category-devided mb-0 p-0">
+                                <a href="#" class="py-2">
+                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                    <span>Gestion des notes</span>
+                                </a>
+                            </li> --}}
+                            <li class="all-category-devided mb-0 p-0">
+                                <a href="{{ route('adminHome') }}" class="py-2">
+                                    <span class="icon"><i class="fa fa-th-large"></i></span>
+                                    <span>Panel d'administration</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
+                    @endif
                     <li class="mobile-menu-helper-bottom"></li>
                 </ul>
             </div>
@@ -126,7 +211,7 @@
                             <div class="item-list">
                                 <ul>
 
-                                    @forelse (Auth::user()->favorie->load('formation') as $fav)
+                                    @forelse (Auth::user( )->favorie->load('formation') as $fav)
                                     <li>
                                         <div class="item clearfix">
                                             <div class="item-image">
@@ -185,7 +270,7 @@
                             <img src="{{ asset('assets/images/uploads/user_image/placeholder.png') }}" alt="placeholder"
                                 class="img-fluid" />
                             @else
-                            <img src="{{ asset(" storage/profil/".Auth::user()->photo)}}"
+                            <img src="{{ asset("storage/profil/".Auth::user()->photo)}}"
                             alt="placeholder" class="img-fluid" />
                             @endif
                         </a>

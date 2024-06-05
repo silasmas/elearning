@@ -5,6 +5,7 @@ use App\Http\Controllers\ExamensController;
 use App\Http\Controllers\FavoriController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserFormateurController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EtudiantController::class, 'index'])->name('home');
 Route::get('/about', [EtudiantController::class, 'about'])->name('about');
-Route::get('/formations', [FormationController::class, 'index'])->name('formations');
+// Route::get('/formations', [FormationController::class, 'index'])->name('formations');
+Route::get('/formations', [FormationController::class, 'all'])->name('formations');
 Route::get('/contact', [EtudiantController::class, 'contact'])->name('contact');
 Route::get('detailFormation/{id}', [FormationController::class, 'show'])->name('detailFormation');
 Route::get('studenConnect', [EtudiantController::class, 'connexon'])->name('studenConnect');
@@ -64,6 +66,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/adminHome', [UserFormateurController::class, 'home'])->name('adminHome');
+    Route::get('/gestionprof', [UserFormateurController::class, 'index'])->name('gestionprof');
+    Route::get('/ateliers', [UserFormateurController::class, 'ateliers'])->name('ateliers');
+    Route::get('/gestionstudent', [UserFormateurController::class, 'student'])->name('gestionstudent');
+    Route::get('/gestionrole', [UserFormateurController::class, 'role'])->name('gestionrole');
+    Route::get('/addUser', [UserFormateurController::class, 'create'])->name('addUser');
+
+    Route::get('/detailProf/{id}', [UserFormateurController::class, 'show'])->name('detailProf');
 });
 
 require __DIR__ . '/auth.php';

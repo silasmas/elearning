@@ -264,6 +264,7 @@ class FormationController extends Controller
         $examPret = examens::where("formation_id", $id)->get();
         if ($examPret) {
             $examen = examens::whereNotIn('id', function ($query) {
+
                 $query->select('examens_id')->from('examen_users')
                     ->where([['examens_id', 3], ['user_id', Auth::user()->id]]);
             })->inRandomOrder()->first();

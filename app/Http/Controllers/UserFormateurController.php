@@ -2,18 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\userFormateur;
-use App\Http\Requests\StoreuserFormateurRequest;
 use App\Http\Requests\UpdateuserFormateurRequest;
+use App\Models\User;
+use App\Models\userFormateur;
+use Illuminate\Http\Request;
 
 class UserFormateurController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function home()
+    {
+        $profs = User::where("prof", "1")->with('formations')->get();
+        // dd($profs);
+        titre("Dashboard");
+        return view("admin.dashboard", compact("profs"));
+    }
     public function index()
     {
-        //
+        $profs = User::where("prof", "1")->with('formations')->get();
+        // dd($profs);
+        titre("Liste des professeurs");
+        return view("admin.listeProf", compact("profs"));
+    } 
+    public function ateliers()
+    {
+        $profs = User::where("prof", "1")->with('formations')->get();
+        // dd($profs);
+        titre("Liste des professeurs");
+        return view("admin.listeProf", compact("profs"));
+    }
+    public function student()
+    {
+        $students = User::where("etudiant", "1")->with('formation')->get();
+        titre("Liste des etudiants");
+        return view("admin.listeStudent", compact("students"));
+    }
+    public function role()
+    {
+        $profs = User::where("prof", "1")->get();
+        titre("Liste des roles");
+        return view("admin.listeNote", compact("profs"));
     }
 
     /**
@@ -21,23 +51,23 @@ class UserFormateurController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.addUser");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreuserFormateurRequest $request)
+    public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(userFormateur $userFormateur)
+    public function show($id)
     {
-        //
+
     }
 
     /**
