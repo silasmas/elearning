@@ -145,7 +145,7 @@
                         </div>
                     </div>
 
-                        @yield('content')
+                        @yield('content') 
 
                         <div class="footer">
                             <div class="pull-right">
